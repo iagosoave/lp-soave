@@ -48,11 +48,6 @@ const Footer = () => {
                   Localização
                 </a>
               </li>
-              <li>
-                <a href="#contato" className="text-gray-500 hover:text-blue-600 transition-colors duration-300 text-sm">
-                  Contato
-                </a>
-              </li>
             </ul>
           </div>
           
