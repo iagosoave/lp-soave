@@ -1,32 +1,33 @@
 // components/Footer.jsx
 import React from 'react';
 import soave from './soave.logo.png';
+
 const Footer = () => {
   const currentYear = new Date().getFullYear();
   
   return (
     <footer className="bg-gradient-to-b from-white to-gray-50 text-gray-600 border-t border-gray-200">
-      <div className="max-w-7xl mx-auto px-6 py-16">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 py-12 md:py-16">
         {/* Conteúdo principal do footer */}
-        <div className="grid grid-cols-1 md:grid-cols-12 gap-10 items-start">
+        <div className="grid grid-cols-1 md:grid-cols-12 gap-8 md:gap-10">
           {/* Logo e descrição */}
-          <div className="md:col-span-4 flex flex-col items-center md:items-start">
+          <div className="md:col-span-4 flex flex-col items-start">
             <div className="mb-4">
               <img 
                 src={soave}
                 alt="Soave Advocacia" 
-                className="h-20 w-auto object-contain"
+                className="h-16 md:h-20 w-auto object-contain"
               />
             </div>
-            <p className="text-gray-500 text-sm leading-relaxed max-w-xs text-center md:text-left mt-2">
+            <p className="text-gray-500 text-sm leading-relaxed max-w-xs text-left mt-2">
               Excelência jurídica personalizada com foco em resultados e atendimento humanizado.
             </p>
           </div>
           
           {/* Links rápidos */}
-          <div className="md:col-span-3 flex flex-col items-center md:items-start">
-            <h3 className="text-sm font-semibold uppercase tracking-wider text-gray-900 mb-4">Links Rápidos</h3>
-            <ul className="space-y-3">
+          <div className="md:col-span-3 flex flex-col items-start">
+            <h3 className="text-sm font-semibold uppercase tracking-wider text-gray-900 mb-3 md:mb-4">Links Rápidos</h3>
+            <ul className="space-y-2 md:space-y-3">
               <li>
                 <a href="#inicio" className="text-gray-500 hover:text-blue-600 transition-colors duration-300 text-sm">
                   Início
@@ -56,9 +57,9 @@ const Footer = () => {
           </div>
           
           {/* Informações de contato */}
-          <div className="md:col-span-3 flex flex-col items-center md:items-start">
-            <h3 className="text-sm font-semibold uppercase tracking-wider text-gray-900 mb-4">Contato</h3>
-            <div className="space-y-3">
+          <div className="md:col-span-3 flex flex-col items-start">
+            <h3 className="text-sm font-semibold uppercase tracking-wider text-gray-900 mb-3 md:mb-4">Contato</h3>
+            <div className="space-y-2 md:space-y-3">
               <div className="flex items-start">
                 <div className="flex-shrink-0 mt-1">
                   <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4 text-blue-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -95,7 +96,7 @@ const Footer = () => {
                   </svg>
                 </div>
                 <div className="ml-3">
-                  <a href="mailto:contato@soaveadvocacia.com.br" className="text-gray-500 hover:text-blue-600 transition-colors duration-300 text-sm">
+                  <a href="mailto:contato@soaveadvocacia.com.br" className="text-gray-500 hover:text-blue-600 transition-colors duration-300 text-sm break-all">
                     contato@soaveadvocacia.com.br
                   </a>
                 </div>
@@ -104,8 +105,8 @@ const Footer = () => {
           </div>
           
           {/* Horário de atendimento e redes sociais */}
-          <div className="md:col-span-2 flex flex-col items-center md:items-start">
-            <h3 className="text-sm font-semibold uppercase tracking-wider text-gray-900 mb-4">Siga-nos</h3>
+          <div className="md:col-span-2 flex flex-col items-start">
+            <h3 className="text-sm font-semibold uppercase tracking-wider text-gray-900 mb-3 md:mb-4">Siga-nos</h3>
             <div className="flex space-x-3 mb-6">
               <a 
                 href="https://www.facebook.com/SoaveAdvocacia/" 
@@ -132,17 +133,17 @@ const Footer = () => {
               </a>
             </div>
             
-            <h3 className="text-sm font-semibold uppercase tracking-wider text-gray-900 mb-4">Horário</h3>
+            <h3 className="text-sm font-semibold uppercase tracking-wider text-gray-900 mb-3 md:mb-4">Horário</h3>
             <p className="text-gray-500 text-sm">xxxx</p>
           </div>
         </div>
         
         {/* Separador elegante */}
-        <div className="mt-12 pt-8 border-t border-gray-200 flex flex-col md:flex-row justify-between items-center">
+        <div className="mt-10 md:mt-12 pt-6 md:pt-8 border-t border-gray-200 flex flex-col md:flex-row justify-between items-start md:items-center">
           <p className="text-gray-400 text-xs">
             &copy; {currentYear} Soave Advocacia. Todos os direitos reservados.
           </p>
-          <div className="mt-4 md:mt-0">
+          <div className="mt-3 md:mt-0">
             <a href="#" className="text-xs text-gray-400 hover:text-blue-600 transition-colors duration-300">
               Política de Privacidade
             </a>
