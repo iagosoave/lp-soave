@@ -89,8 +89,15 @@ const HeroSection = () => {
         clearTimeout(timer);
       });
       
-      // Playback rate adjustment (slower on mobile for performance)
-      videoRef.current.playbackRate = isMobile ? 0.5 : 0.6;
+      // Playback rate adjustment and quality enhancement for mobile
+      videoRef.current.playbackRate = isMobile ? 0.6 : 0.6;
+      
+      // Force higher quality on mobile
+      if (isMobile && videoRef.current.videoWidth) {
+        // If video dimensions are available, ensure we're using high quality
+        videoRef.current.style.width = 'auto';
+        videoRef.current.style.height = 'auto';
+      }
       
       // Try to force play on mobile
       const attemptAutoplay = () => {
@@ -229,7 +236,7 @@ const HeroSection = () => {
     return (
       <motion.video
         ref={videoRef}
-        className="w-full h-full object-cover object-center"
+        className="w-full h-full object-cover"
         autoPlay
         loop
         muted
@@ -238,6 +245,11 @@ const HeroSection = () => {
         poster="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1 1' width='1' height='1'%3E%3Crect width='1' height='1' fill='%23101827'/%3E%3C/svg%3E"
         style={{ 
           filter: `brightness(${backgroundBrightness.get()})`,
+          objectPosition: isMobile ? 'center center' : 'center center',
+          transformOrigin: 'center center',
+          transform: isMobile ? 'scale(1.2)' : 'none',
+          minWidth: isMobile ? '120%' : '100%',
+          minHeight: '100%',
         }}
       >
         <source src={bannerVideo} type="video/webm" />
@@ -263,7 +275,9 @@ const HeroSection = () => {
           animate={{ opacity: 1 }}
           transition={{ duration: 1 }}
           style={{
-            background: `linear-gradient(135deg, rgba(0, 0, 0, 0.95) 0%, rgba(0, 0, 0, 0.85) 50%, rgba(0, 0, 0, 0.75) 100%)`
+            background: isMobile 
+              ? `linear-gradient(135deg, rgba(0, 0, 0, 0.85) 0%, rgba(0, 0, 0, 0.75) 50%, rgba(0, 0, 0, 0.7) 100%)` 
+              : `linear-gradient(135deg, rgba(0, 0, 0, 0.95) 0%, rgba(0, 0, 0, 0.85) 50%, rgba(0, 0, 0, 0.75) 100%)`
           }}
         />
         
@@ -295,7 +309,15 @@ const HeroSection = () => {
             scale: backgroundScale
           }}
         >
-          {renderVideoOrFallback()}
+          <div className="absolute inset-0" style={{
+            // Extra container to help with mobile positioning and focus
+            display: 'flex',
+            justifyContent: 'center',
+            alignItems: 'center',
+            overflow: 'hidden',
+          }}>
+            {renderVideoOrFallback()}
+          </div>
         </motion.div>
       </div>
       
