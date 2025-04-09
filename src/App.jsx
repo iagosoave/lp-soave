@@ -18,7 +18,7 @@ function App() {
       <Footer  />
       
       {/* Botão de WhatsApp flutuante */}
-      // WhatsApp floating button
+     
 <a
   href="https://wa.me/5515997160075"
   target="_blank"
