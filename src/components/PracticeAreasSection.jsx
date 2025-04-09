@@ -15,9 +15,27 @@ const PracticeAreasSection = () => {
   // Estado para controlar o card expandido/em foco
   const [activeCard, setActiveCard] = useState(null);
   const [isInView, setIsInView] = useState(false);
+  const [isMobile, setIsMobile] = useState(false);
   const sectionRef = useRef(null);
   
-  // Detectar quando a seção estiver visível na tela
+  // Detectar se é dispositivo móvel
+  useEffect(() => {
+    const checkIfMobile = () => {
+      setIsMobile(window.innerWidth < 768);
+    };
+    
+    // Verificação inicial
+    checkIfMobile();
+    
+    // Atualizar ao redimensionar a janela
+    window.addEventListener('resize', checkIfMobile);
+    
+    return () => {
+      window.removeEventListener('resize', checkIfMobile);
+    };
+  }, []);
+  
+  // Detectar quando a seção estiver visível na tela - com threshold menor para mobile
   useEffect(() => {
     const observer = new IntersectionObserver(
       ([entry]) => {
@@ -25,7 +43,7 @@ const PracticeAreasSection = () => {
           setIsInView(true);
         }
       },
-      { threshold: 0.2 }
+      { threshold: isMobile ? 0.1 : 0.2 }
     );
     
     if (sectionRef.current) {
@@ -37,7 +55,7 @@ const PracticeAreasSection = () => {
         observer.unobserve(sectionRef.current);
       }
     };
-  }, []);
+  }, [isMobile]);
 
   // Efeito de scroll suave para os links de âncora
   useEffect(() => {
@@ -112,15 +130,15 @@ const PracticeAreasSection = () => {
     }
   ];
 
-  // Variantes de animação para framer-motion
+  // Variantes de animação - simplificadas para mobile
   const containerVariants = {
     hidden: { opacity: 0 },
     visible: {
       opacity: 1,
       transition: {
         when: "beforeChildren",
-        staggerChildren: 0.1,
-        delayChildren: 0.3
+        staggerChildren: isMobile ? 0.05 : 0.1,
+        delayChildren: isMobile ? 0.1 : 0.3
       }
     }
   };
@@ -130,7 +148,7 @@ const PracticeAreasSection = () => {
     visible: {
       y: 0,
       opacity: 1,
-      transition: { duration: 0.6, ease: "easeOut" }
+      transition: { duration: isMobile ? 0.4 : 0.6, ease: "easeOut" }
     }
   };
 
@@ -140,7 +158,7 @@ const PracticeAreasSection = () => {
       y: 0, 
       opacity: 1,
       transition: { 
-        duration: 0.8, 
+        duration: isMobile ? 0.5 : 0.8, 
         ease: "easeOut"
       }
     }
@@ -152,18 +170,21 @@ const PracticeAreasSection = () => {
       width: "4rem", 
       opacity: 1,
       transition: { 
-        duration: 0.8, 
+        duration: isMobile ? 0.5 : 0.8, 
         ease: "easeOut",
-        delay: 0.4
+        delay: isMobile ? 0.2 : 0.4
       }
     }
   };
 
-  const staggerDelay = 0.1;
+  const staggerDelay = isMobile ? 0.05 : 0.1;
 
-  // Animar partículas de fundo
-  const particleCount = 12;
+  // Animar partículas de fundo - reduzidas para mobile
+  const particleCount = isMobile ? 4 : 12;
   const renderBackgroundParticles = () => {
+    // Omitir partículas na versão mobile para melhorar performance
+    if (isMobile) return null;
+    
     const particles = [];
     for (let i = 0; i < particleCount; i++) {
       particles.push(
@@ -193,47 +214,53 @@ const PracticeAreasSection = () => {
   return (
     <section 
       id="areas" 
-      className="py-20 md:py-28 relative bg-gradient-to-b from-gray-50 to-white overflow-hidden"
+      className="py-16 md:py-28 relative bg-gradient-to-b from-gray-50 to-white overflow-hidden"
       ref={sectionRef}
     >
-      {/* Elementos de design de fundo aprimorados */}
+      {/* Elementos de design de fundo aprimorados - simplificados para mobile */}
       <div className="absolute top-0 left-0 right-0 h-1/3 bg-gradient-to-b from-blue-50 to-transparent opacity-70"></div>
-      <div className="absolute top-20 left-10 w-64 h-64 rounded-full bg-blue-50 blur-3xl opacity-40"></div>
-      <div className="absolute bottom-20 right-10 w-80 h-80 rounded-full bg-gray-100 blur-3xl opacity-50"></div>
-      <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-full h-full bg-gradient-to-br from-blue-50/10 via-transparent to-gray-50/20"></div>
       
-      {/* Partículas animadas para dar dinamismo ao fundo */}
+      {/* Limitar efeitos de fundo em dispositivos móveis */}
+      {!isMobile && (
+        <>
+          <div className="absolute top-20 left-10 w-64 h-64 rounded-full bg-blue-50 blur-3xl opacity-40"></div>
+          <div className="absolute bottom-20 right-10 w-80 h-80 rounded-full bg-gray-100 blur-3xl opacity-50"></div>
+          <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-full h-full bg-gradient-to-br from-blue-50/10 via-transparent to-gray-50/20"></div>
+          
+          {/* Linhas decorativas - apenas para desktop */}
+          <motion.div 
+            className="absolute top-40 left-0 h-px w-full bg-gradient-to-r from-transparent via-blue-200 to-transparent opacity-30"
+            animate={{ 
+              opacity: [0.2, 0.4, 0.2]
+            }}
+            transition={{ 
+              duration: 8,
+              repeat: Infinity,
+              ease: "easeInOut"
+            }}
+          ></motion.div>
+          <motion.div 
+            className="absolute bottom-60 left-0 h-px w-full bg-gradient-to-r from-transparent via-gray-300 to-transparent opacity-30"
+            animate={{ 
+              opacity: [0.2, 0.5, 0.2]
+            }}
+            transition={{ 
+              duration: 8,
+              repeat: Infinity,
+              ease: "easeInOut",
+              delay: 2
+            }}
+          ></motion.div>
+        </>
+      )}
+      
+      {/* Partículas animadas - somente para desktop */}
       {renderBackgroundParticles()}
-      
-      {/* Linhas decorativas */}
-      <motion.div 
-        className="absolute top-40 left-0 h-px w-full bg-gradient-to-r from-transparent via-blue-200 to-transparent opacity-30"
-        animate={{ 
-          opacity: [0.2, 0.4, 0.2]
-        }}
-        transition={{ 
-          duration: 8,
-          repeat: Infinity,
-          ease: "easeInOut"
-        }}
-      ></motion.div>
-      <motion.div 
-        className="absolute bottom-60 left-0 h-px w-full bg-gradient-to-r from-transparent via-gray-300 to-transparent opacity-30"
-        animate={{ 
-          opacity: [0.2, 0.5, 0.2]
-        }}
-        transition={{ 
-          duration: 8,
-          repeat: Infinity,
-          ease: "easeInOut",
-          delay: 2
-        }}
-      ></motion.div>
       
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         {/* Título com animação aprimorada e melhor alinhamento */}
         <motion.div 
-          className="text-center mb-24 flex flex-col items-center justify-center"
+          className="text-center mb-16 md:mb-24 flex flex-col items-center justify-center"
           initial="hidden"
           animate={isInView ? "visible" : "hidden"}
           variants={containerVariants}
@@ -242,37 +269,42 @@ const PracticeAreasSection = () => {
             className="relative inline-flex flex-col items-center"
             variants={titleVariants}
           >
-            {/* Elementos decorativos ao redor do título - reposicionados para melhor alinhamento */}
+            {/* Elementos decorativos ao redor do título - simplificados para mobile */}
             <motion.div 
               className="absolute -top-6 left-1/2 transform -translate-x-1/2 w-12 h-1 bg-gradient-to-r from-blue-300 via-blue-500 to-blue-300"
               initial={{ width: 0, opacity: 0 }}
               animate={isInView ? { width: 48, opacity: 1 } : { width: 0, opacity: 0 }}
-              transition={{ delay: 0.2, duration: 0.8 }}
+              transition={{ delay: isMobile ? 0.1 : 0.2, duration: isMobile ? 0.5 : 0.8 }}
             ></motion.div>
             
-            <motion.div
-              className="absolute -left-6 top-1/2 transform -translate-y-1/2 w-4 h-4 rounded-full"
-              initial={{ scale: 0, opacity: 0 }}
-              animate={isInView ? { 
-                scale: [0, 1.2, 1],
-                opacity: [0, 0.8, 0.2]
-              } : {}}
-              transition={{ delay: 0.6, duration: 1 }}
-            >
-              <div className="w-full h-full rounded-full bg-blue-200 animate-ping opacity-30 duration-1000"></div>
-            </motion.div>
-            
-            <motion.div
-              className="absolute -right-6 top-1/2 transform -translate-y-1/2 w-4 h-4 rounded-full"
-              initial={{ scale: 0, opacity: 0 }}
-              animate={isInView ? { 
-                scale: [0, 1.2, 1],
-                opacity: [0, 0.8, 0.2]
-              } : {}}
-              transition={{ delay: 0.9, duration: 1 }}
-            >
-              <div className="w-full h-full rounded-full bg-blue-200 animate-ping opacity-30 duration-800 delay-700"></div>
-            </motion.div>
+            {/* Elementos decorativos avançados - apenas para desktop */}
+            {!isMobile && (
+              <>
+                <motion.div
+                  className="absolute -left-6 top-1/2 transform -translate-y-1/2 w-4 h-4 rounded-full"
+                  initial={{ scale: 0, opacity: 0 }}
+                  animate={isInView ? { 
+                    scale: [0, 1.2, 1],
+                    opacity: [0, 0.8, 0.2]
+                  } : {}}
+                  transition={{ delay: 0.6, duration: 1 }}
+                >
+                  <div className="w-full h-full rounded-full bg-blue-200 animate-ping opacity-30 duration-1000"></div>
+                </motion.div>
+                
+                <motion.div
+                  className="absolute -right-6 top-1/2 transform -translate-y-1/2 w-4 h-4 rounded-full"
+                  initial={{ scale: 0, opacity: 0 }}
+                  animate={isInView ? { 
+                    scale: [0, 1.2, 1],
+                    opacity: [0, 0.8, 0.2]
+                  } : {}}
+                  transition={{ delay: 0.9, duration: 1 }}
+                >
+                  <div className="w-full h-full rounded-full bg-blue-200 animate-ping opacity-30 duration-800 delay-700"></div>
+                </motion.div>
+              </>
+            )}
             
             {/* Título principal com texto centralizado e melhor posicionamento */}
             <motion.h2 
@@ -281,16 +313,21 @@ const PracticeAreasSection = () => {
               animate={isInView ? { 
                 y: 0, 
                 opacity: 1,
-                textShadow: ['0px 0px 0px rgba(0,0,0,0)', '0px 0px 8px rgba(59,130,246,0.2)', '0px 0px 0px rgba(0,0,0,0)']
+                // Simplificar animação em dispositivos móveis
+                textShadow: isMobile ? undefined : [
+                  '0px 0px 0px rgba(0,0,0,0)', 
+                  '0px 0px 8px rgba(59,130,246,0.2)', 
+                  '0px 0px 0px rgba(0,0,0,0)'
+                ]
               } : {}}
               transition={{ 
-                duration: 1,
-                textShadow: {
+                duration: isMobile ? 0.6 : 1,
+                textShadow: !isMobile ? {
                   duration: 2,
                   repeat: Infinity,
                   repeatType: "reverse",
                   ease: "easeInOut"
-                }
+                } : undefined
               }}
             >
               ÁREAS DE ATUAÇÃO
@@ -301,7 +338,7 @@ const PracticeAreasSection = () => {
               className="text-xs text-blue-600 font-medium tracking-widest block mt-1 text-center"
               initial={{ opacity: 0, y: 5 }}
               animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 5 }}
-              transition={{ delay: 0.4, duration: 0.6 }}
+              transition={{ delay: isMobile ? 0.2 : 0.4, duration: isMobile ? 0.4 : 0.6 }}
             >
               EXPERTISE JURÍDICA
             </motion.span>
@@ -309,13 +346,13 @@ const PracticeAreasSection = () => {
           
           {/* Linha decorativa animada - centralizada adequadamente */}
           <motion.div 
-            className="h-px bg-gradient-to-r from-transparent via-blue-700 to-transparent mx-auto mt-8 w-16"
+            className="h-px bg-gradient-to-r from-transparent via-blue-700 to-transparent mx-auto mt-6 md:mt-8 w-16"
             variants={lineVariants}
             animate={isInView ? { 
               width: ["0%", "4rem", "4rem"],
               x: ["-1rem", "0rem", "0rem"]
             } : {}}
-            transition={{ duration: 1, times: [0, 0.7, 1] }}
+            transition={{ duration: isMobile ? 0.6 : 1, times: [0, 0.7, 1] }}
           ></motion.div>
         </motion.div>
         
@@ -329,205 +366,148 @@ const PracticeAreasSection = () => {
           {areas.map((area, index) => (
             <motion.div 
               key={area.id}
-              className={`group relative overflow-hidden rounded-lg transition-all duration-500 ease-in-out ${activeCard === area.id ? 'shadow-xl' : 'shadow-md hover:shadow-xl'} backdrop-blur-sm bg-white/95`}
+              className={`group relative overflow-hidden rounded-lg transition-all duration-300 ease-in-out ${activeCard === area.id ? 'shadow-xl' : 'shadow-md hover:shadow-xl'} backdrop-blur-sm bg-white/95`}
               variants={itemVariants}
               custom={index}
               transition={{ delay: index * staggerDelay }}
-              whileHover={{ 
+              whileHover={!isMobile ? { 
                 y: -5,
                 transition: { duration: 0.3, ease: "easeOut" }
-              }}
-              onMouseEnter={() => setActiveCard(area.id)}
-              onMouseLeave={() => setActiveCard(null)}
+              } : {}}
+              onMouseEnter={() => !isMobile && setActiveCard(area.id)}
+              onMouseLeave={() => !isMobile && setActiveCard(null)}
+              onClick={() => isMobile && setActiveCard(activeCard === area.id ? null : area.id)}
               id={area.id}
             >
               {/* Efeito de gradiente na borda superior */}
               <div 
-                className={`h-1 w-full absolute top-0 left-0 right-0 transition-all duration-700 ease-in-out ${activeCard === area.id ? 'bg-gradient-to-r from-blue-400 via-blue-600 to-blue-800' : 'bg-gradient-to-r from-gray-200 via-gray-300 to-gray-200'}`}
+                className={`h-1 w-full absolute top-0 left-0 right-0 transition-all duration-300 ease-in-out ${activeCard === area.id ? 'bg-gradient-to-r from-blue-400 via-blue-600 to-blue-800' : 'bg-gradient-to-r from-gray-200 via-gray-300 to-gray-200'}`}
               ></div>
               
-              {/* Efeito de brilho ao passar o mouse */}
-              <div 
-                className={`absolute -inset-px bg-gradient-to-r from-blue-400 to-blue-600 opacity-0 ${activeCard === area.id ? 'opacity-10' : 'group-hover:opacity-5'} transition-opacity duration-700 rounded-lg blur-md`}
-              ></div>
+              {/* Efeito de brilho ao passar o mouse - simplificado para mobile */}
+              {!isMobile && (
+                <div 
+                  className={`absolute -inset-px bg-gradient-to-r from-blue-400 to-blue-600 opacity-0 ${activeCard === area.id ? 'opacity-10' : 'group-hover:opacity-5'} transition-opacity duration-700 rounded-lg blur-md`}
+                ></div>
+              )}
               
-              <div className="p-7 md:p-8 relative z-10">
+              <div className="p-6 md:p-8 relative z-10">
                 {/* Ícone animado com design aprimorado */}
-                <div className="flex items-center mb-6">
-                  <motion.div 
-                    className={`relative w-16 h-16 rounded-xl flex items-center justify-center mr-5 transition-all duration-500 ease-in-out overflow-hidden ${activeCard === area.id ? 'bg-gradient-to-br from-blue-50 to-blue-100 text-blue-600 shadow-md' : 'bg-gray-50 text-gray-500 group-hover:bg-blue-50/80 group-hover:text-blue-500'}`}
-                    whileHover={{ rotate: [0, -2, 2, 0], scale: 1.05 }}
-                    animate={activeCard === area.id ? { scale: [1, 1.05, 1] } : {}}
-                    transition={{ duration: 0.8, ease: "easeOut" }}
+                <div className="flex items-center mb-5 md:mb-6">
+                  <div 
+                    className={`relative w-14 h-14 md:w-16 md:h-16 rounded-xl flex items-center justify-center mr-4 md:mr-5 transition-all duration-300 ease-in-out ${activeCard === area.id ? 'bg-gradient-to-br from-blue-50 to-blue-100 text-blue-600 shadow-md' : 'bg-gray-50 text-gray-500'}`}
                   >
-                    {/* Elemento de decoração no ícone */}
-                    <div className={`absolute inset-0 bg-gradient-to-tr from-blue-200/0 via-blue-400/10 to-transparent rounded-xl opacity-0 transition-opacity duration-500 ${activeCard === area.id ? 'opacity-100' : 'group-hover:opacity-40'}`}></div>
+                    {/* Efeitos de decoração simplificados */}
+                    <div className={`absolute inset-0 bg-gradient-to-tr from-blue-200/0 via-blue-400/10 to-transparent rounded-xl opacity-0 transition-opacity duration-300 ${activeCard === area.id ? 'opacity-100' : ''}`}></div>
                     
-                    {/* Efeito de brilho no ícone */}
-                    <motion.div
-                      className="absolute inset-0 bg-gradient-to-tr from-transparent via-white to-transparent opacity-0 rotate-12 rounded-xl"
-                      animate={activeCard === area.id ? { 
-                        x: ['-100%', '100%'],
-                        opacity: [0, 0.4, 0] 
-                      } : {}}
-                      transition={{ 
-                        duration: 1.5, 
-                        ease: "easeInOut",
-                        repeat: activeCard === area.id ? Infinity : 0,
-                        repeatDelay: 3
-                      }}
-                    />
-                    
-                    <motion.div
-                      className="relative z-10"
-                      animate={activeCard === area.id ? { 
-                        scale: [1, 1.15, 1],
-                        rotate: [0, -3, 3, 0] 
-                      } : {}}
-                      transition={{ 
-                        duration: 0.8, 
-                        ease: "easeInOut"
-                      }}
-                    >
+                    {/* Ícone com animação simplificada */}
+                    <div className="relative z-10">
                       {area.icon}
-                    </motion.div>
-                    
-                    {/* Círculo de efeito */}
-                    <motion.div 
-                      className="absolute -inset-1 border border-blue-200/70 rounded-xl opacity-0"
-                      animate={activeCard === area.id ? { 
-                        opacity: [0, 0.7, 0],
-                        scale: [0.8, 1.2]
-                      } : {}}
-                      transition={{ 
-                        duration: 2, 
-                        ease: "easeOut",
-                        repeat: activeCard === area.id ? Infinity : 0,
-                        repeatDelay: 1
-                      }}
-                    />
-                  </motion.div>
+                    </div>
+                  </div>
                   
                   <div>
-                    <motion.h3 
-                      className={`text-lg md:text-xl font-medium transition-colors duration-300 tracking-wide ${activeCard === area.id ? 'text-blue-800' : 'text-gray-900 group-hover:text-blue-700'}`}
-                      animate={activeCard === area.id ? { 
-                        x: [0, 5, 0],
-                        textShadow: ['0px 0px 0px rgba(0,0,0,0)', '0px 0px 4px rgba(59,130,246,0.3)', '0px 0px 0px rgba(0,0,0,0)']
-                      } : {}}
-                      transition={{ duration: 0.7 }}
+                    <h3 
+                      className={`text-lg md:text-xl font-medium transition-colors duration-300 tracking-wide ${activeCard === area.id ? 'text-blue-800' : 'text-gray-900'}`}
                     >
                       {area.title}
-                    </motion.h3>
-                    <motion.div 
-                      className="h-0.5 bg-gradient-to-r from-transparent via-blue-500 to-transparent rounded-full mt-1.5"
-                      initial={{ width: 0, opacity: 0 }}
-                      animate={activeCard === area.id 
-                        ? { width: "100%", opacity: 1 } 
-                        : { width: "0%", opacity: 0, transition: { duration: 0.3 } }
-                      }
-                      transition={{ duration: 0.5, ease: "easeOut" }}
-                    ></motion.div>
+                    </h3>
+                    
+                    {activeCard === area.id && (
+                      <motion.div 
+                        className="h-0.5 bg-gradient-to-r from-transparent via-blue-500 to-transparent rounded-full mt-1.5"
+                        initial={{ width: 0, opacity: 0 }}
+                        animate={{ width: "100%", opacity: 1 }}
+                        transition={{ duration: 0.3 }}
+                      ></motion.div>
+                    )}
                   </div>
                 </div>
                 
-                {/* Descrição com animações aprimoradas */}
+                {/* Descrição com animações simplificadas */}
                 <div 
-                  className={`relative overflow-hidden transition-all duration-700 ease-in-out ${activeCard === area.id ? 'max-h-60 translate-y-0' : 'max-h-36 group-hover:max-h-40'}`}
+                  className={`relative overflow-hidden transition-all duration-300 ease-in-out ${activeCard === area.id ? 'max-h-60' : 'max-h-36'}`}
                 >
-                  <motion.div
-                    initial={false}
-                    animate={activeCard === area.id ? { 
-                      y: [5, 0],
-                      opacity: [0.9, 1]
-                    } : {}}
-                    transition={{ duration: 0.5 }}
-                  >
-                    <p className={`text-sm leading-relaxed ${activeCard === area.id ? 'text-gray-700' : 'text-gray-600'}`}>
-                      {area.description}
-                    </p>
-                    
-                    {/* Elemento visual para destacar pontos-chave */}
-                    <div className={`mt-3 transition-all duration-700 ease-in-out ${activeCard === area.id ? 'opacity-100' : 'opacity-0 hidden'}`}>
+                  <p className={`text-sm leading-relaxed ${activeCard === area.id ? 'text-gray-700' : 'text-gray-600'}`}>
+                    {area.description}
+                  </p>
+                  
+                  {/* Elemento visual para destacar pontos-chave - apenas quando ativo */}
+                  {activeCard === area.id && (
+                    <div className="mt-3">
                       <div className="flex items-center space-x-2">
-                        <motion.div 
-                          className="h-1 w-1 rounded-full bg-blue-500"
-                          animate={{ scale: [1, 1.5, 1] }}
-                          transition={{ 
-                            duration: 1.5, 
-                            repeat: Infinity,
-                            repeatType: "reverse"
-                          }}
-                        />
+                        <div className="h-1 w-1 rounded-full bg-blue-500" />
                         <span className="text-xs text-blue-700 font-medium">Expertise especializada</span>
                       </div>
                     </div>
-                  </motion.div>
+                  )}
                   
-                  {/* Efeito de gradiente no final do texto quando em hover */}
+                  {/* Efeito de gradiente no final do texto */}
                   <div 
-                    className={`absolute bottom-0 left-0 right-0 h-10 bg-gradient-to-t from-white/95 to-transparent transition-opacity duration-500 ${activeCard === area.id ? 'opacity-0' : 'opacity-100'}`}
+                    className={`absolute bottom-0 left-0 right-0 h-10 bg-gradient-to-t from-white/95 to-transparent transition-opacity duration-300 ${activeCard === area.id ? 'opacity-0' : 'opacity-100'}`}
                   ></div>
                 </div>
                 
-                {/* Indicador visual interativo */}
-                <div className="mt-4 flex justify-end items-center">
-                  <motion.div 
-                    className={`h-1 w-0 bg-blue-500 rounded-full transition-all duration-700 ease-in-out ${activeCard === area.id ? 'w-1/4' : 'group-hover:w-1/6'}`}
-                    animate={activeCard === area.id ? { width: ["0%", "25%"] } : {}}
-                    transition={{ duration: 0.8, ease: "easeOut" }}
-                  ></motion.div>
-                </div>
+                {/* Indicador visual interativo - simplificado */}
+                {activeCard === area.id && (
+                  <div className="mt-4 flex justify-end items-center">
+                    <motion.div 
+                      className="h-1 w-1/4 bg-blue-500 rounded-full"
+                      initial={{ width: 0 }}
+                      animate={{ width: "25%" }}
+                      transition={{ duration: 0.3 }}
+                    ></motion.div>
+                  </div>
+                )}
               </div>
               
-              {/* Efeito de reflexo ao passar o mouse */}
-              <div 
-                className={`absolute top-0 left-0 right-0 h-full w-full bg-gradient-to-r from-transparent via-white/20 to-transparent -translate-x-full group-hover:translate-x-full transition-all duration-1000 ease-in-out opacity-0 ${activeCard === area.id ? 'opacity-30' : 'group-hover:opacity-20'}`}
-              ></div>
+              {/* Remover efeitos de reflexo complexos em dispositivos móveis */}
             </motion.div>
           ))}
         </motion.div>
         
-        {/* Elemento decorativo final */}
-        <motion.div 
-          className="mt-20 md:mt-24 flex justify-center items-center"
-          initial={{ opacity: 0, scale: 0.8 }}
-          animate={isInView ? { opacity: 1, scale: 1 } : { opacity: 0, scale: 0.8 }}
-          transition={{ delay: 1, duration: 0.8 }}
-        >
+        {/* Elemento decorativo final - simplificado para mobile */}
+        {!isMobile && (
           <motion.div 
-            className="h-0.5 w-4 bg-blue-400 mx-1 rounded-full"
-            animate={{ width: [4, 16, 4] }}
-            transition={{ 
-              duration: 2,
-              ease: "easeInOut",
-              repeat: Infinity,
-              repeatType: "reverse"
-            }}
-          ></motion.div>
-          <motion.div 
-            className="h-0.5 w-8 bg-blue-600 mx-1 rounded-full"
-            animate={{ width: [8, 32, 8] }}
-            transition={{ 
-              duration: 3,
-              ease: "easeInOut",
-              repeat: Infinity,
-              repeatType: "reverse",
-              delay: 0.2
-            }}
-          ></motion.div>
-          <motion.div 
-            className="h-0.5 w-4 bg-blue-400 mx-1 rounded-full"
-            animate={{ width: [4, 16, 4] }}
-            transition={{ 
-              duration: 2,
-              ease: "easeInOut",
-              repeat: Infinity,
-              repeatType: "reverse",
-              delay: 0.4
-            }}
-          ></motion.div>
-        </motion.div>
+            className="mt-16 md:mt-24 flex justify-center items-center"
+            initial={{ opacity: 0, scale: 0.8 }}
+            animate={isInView ? { opacity: 1, scale: 1 } : { opacity: 0, scale: 0.8 }}
+            transition={{ delay: 0.5, duration: 0.6 }}
+          >
+            <motion.div 
+              className="h-0.5 w-4 bg-blue-400 mx-1 rounded-full"
+              animate={{ width: [4, 16, 4] }}
+              transition={{ 
+                duration: 2,
+                ease: "easeInOut",
+                repeat: Infinity,
+                repeatType: "reverse"
+              }}
+            ></motion.div>
+            <motion.div 
+              className="h-0.5 w-8 bg-blue-600 mx-1 rounded-full"
+              animate={{ width: [8, 32, 8] }}
+              transition={{ 
+                duration: 3,
+                ease: "easeInOut",
+                repeat: Infinity,
+                repeatType: "reverse",
+                delay: 0.2
+              }}
+            ></motion.div>
+            <motion.div 
+              className="h-0.5 w-4 bg-blue-400 mx-1 rounded-full"
+              animate={{ width: [4, 16, 4] }}
+              transition={{ 
+                duration: 2,
+                ease: "easeInOut",
+                repeat: Infinity,
+                repeatType: "reverse",
+                delay: 0.4
+              }}
+            ></motion.div>
+          </motion.div>
+        )}
       </div>
     </section>
   );
