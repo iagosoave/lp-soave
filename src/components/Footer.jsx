@@ -1,51 +1,118 @@
 // components/Footer.jsx
 import React from 'react';
+import soave from './soave.logo.png';
 
 const Footer = () => {
   const currentYear = new Date().getFullYear();
   
   return (
-    <footer className="bg-gray-100 text-gray-600 border-t border-gray-200">
-      <div className="max-w-7xl mx-auto px-6 py-8">
-        <div className="flex flex-col md:flex-row justify-between items-center space-y-6 md:space-y-0">
-          {/* Logo e nome */}
-          <div>
-            <p className="text-lg font-light">Soave Advocacia</p>
+    <footer className="bg-gradient-to-b from-white to-gray-50 text-gray-600 border-t border-gray-200">
+      <div className="max-w-7xl mx-auto px-6 py-16">
+        {/* Conteúdo principal do footer */}
+        <div className="grid grid-cols-1 md:grid-cols-12 gap-10 items-start">
+          {/* Logo e descrição */}
+          <div className="md:col-span-4 flex flex-col items-center md:items-start">
+            <div className="mb-4">
+              <img 
+                src={soave}
+                alt="Soave Advocacia" 
+                className="h-20 w-auto object-contain"
+              />
+            </div>
+            <p className="text-gray-500 text-sm leading-relaxed max-w-xs text-center md:text-left mt-2">
+              Excelência jurídica personalizada com foco em resultados e atendimento humanizado.
+            </p>
           </div>
           
-          {/* Informações de contato - versão minimalista */}
-          <div className="flex flex-col sm:flex-row items-center sm:space-x-8 space-y-4 sm:space-y-0">
-            <div className="flex items-center space-x-6">
-              {/* Telefone */}
-              <a 
-                href="tel:+5515997160075" 
-                className="text-gray-500 hover:text-gray-800 transition-colors duration-200 text-sm flex items-center"
-              >
-                <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z" />
-                </svg>
-                (15) 99716-0075
-              </a>
+          {/* Links rápidos */}
+          <div className="md:col-span-3 flex flex-col items-center md:items-start">
+            <h3 className="text-sm font-semibold uppercase tracking-wider text-gray-900 mb-4">Links Rápidos</h3>
+            <ul className="space-y-3">
+              <li>
+                <a href="#inicio" className="text-gray-500 hover:text-blue-600 transition-colors duration-300 text-sm">
+                  Início
+                </a>
+              </li>
+              <li>
+                <a href="#sobre" className="text-gray-500 hover:text-blue-600 transition-colors duration-300 text-sm">
+                  Sobre Nós
+                </a>
+              </li>
+              <li>
+                <a href="#areas" className="text-gray-500 hover:text-blue-600 transition-colors duration-300 text-sm">
+                  Áreas de Atuação
+                </a>
+              </li>
+              <li>
+                <a href="#localizacao" className="text-gray-500 hover:text-blue-600 transition-colors duration-300 text-sm">
+                  Localização
+                </a>
+              </li>
+              <li>
+                <a href="#contato" className="text-gray-500 hover:text-blue-600 transition-colors duration-300 text-sm">
+                  Contato
+                </a>
+              </li>
+            </ul>
+          </div>
+          
+          {/* Informações de contato */}
+          <div className="md:col-span-3 flex flex-col items-center md:items-start">
+            <h3 className="text-sm font-semibold uppercase tracking-wider text-gray-900 mb-4">Contato</h3>
+            <div className="space-y-3">
+              <div className="flex items-start">
+                <div className="flex-shrink-0 mt-1">
+                  <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4 text-blue-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
+                  </svg>
+                </div>
+                <div className="ml-3">
+                  <p className="text-gray-500 text-sm leading-relaxed">
+                    Rua José Maria Hanickel, 150<br />
+                    Conj. 71 - Edifício Tokyo<br />
+                    Sorocaba/SP - CEP 18047-360
+                  </p>
+                </div>
+              </div>
               
-              {/* Email */}
-              <a 
-                href="mailto:contato@soaveadvocacia.com.br" 
-                className="text-gray-500 hover:text-gray-800 transition-colors duration-200 text-sm flex items-center"
-              >
-                <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
-                </svg>
-                contato@soaveadvocacia.com.br
-              </a>
+              <div className="flex items-start">
+                <div className="flex-shrink-0 mt-1">
+                  <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4 text-blue-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z" />
+                  </svg>
+                </div>
+                <div className="ml-3">
+                  <a href="tel:+5515997160075" className="text-gray-500 hover:text-blue-600 transition-colors duration-300 text-sm">
+                    (15) 99716-0075
+                  </a>
+                </div>
+              </div>
+              
+              <div className="flex items-start">
+                <div className="flex-shrink-0 mt-1">
+                  <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4 text-blue-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
+                  </svg>
+                </div>
+                <div className="ml-3">
+                  <a href="mailto:contato@soaveadvocacia.com.br" className="text-gray-500 hover:text-blue-600 transition-colors duration-300 text-sm">
+                    contato@soaveadvocacia.com.br
+                  </a>
+                </div>
+              </div>
             </div>
-            
-            {/* Redes sociais - minimalista */}
-            <div className="flex items-center space-x-4">
+          </div>
+          
+          {/* Horário de atendimento e redes sociais */}
+          <div className="md:col-span-2 flex flex-col items-center md:items-start">
+            <h3 className="text-sm font-semibold uppercase tracking-wider text-gray-900 mb-4">Siga-nos</h3>
+            <div className="flex space-x-3 mb-6">
               <a 
                 href="https://www.facebook.com/SoaveAdvocacia/" 
                 target="_blank" 
                 rel="noopener noreferrer"
-                className="text-gray-400 hover:text-gray-600 transition-colors duration-200"
+                className="w-8 h-8 flex items-center justify-center rounded-full bg-white border border-gray-200 text-blue-600 hover:bg-blue-50 hover:border-blue-100 transition-all duration-300 shadow-sm"
                 aria-label="Facebook"
               >
                 <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
@@ -57,7 +124,7 @@ const Footer = () => {
                 href="https://www.instagram.com/soaveadvocacia/" 
                 target="_blank" 
                 rel="noopener noreferrer"
-                className="text-gray-400 hover:text-gray-600 transition-colors duration-200"
+                className="w-8 h-8 flex items-center justify-center rounded-full bg-white border border-gray-200 text-blue-600 hover:bg-blue-50 hover:border-blue-100 transition-all duration-300 shadow-sm"
                 aria-label="Instagram"
               >
                 <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
@@ -65,17 +132,22 @@ const Footer = () => {
                 </svg>
               </a>
             </div>
+            
+            <h3 className="text-sm font-semibold uppercase tracking-wider text-gray-900 mb-4">Horário</h3>
+            <p className="text-gray-500 text-sm">xxxx</p>
           </div>
         </div>
         
-        {/* Endereço - versão minimalista */}
-        <div className="mt-6 text-center text-xs text-gray-500">
-          <p>Rua José Maria Hanickel, 150 - Conj. 71, Edifício Tokyo - Portal da Colina, Sorocaba/SP</p>
-        </div>
-        
-        {/* Copyright - minimalista */}
-        <div className="mt-6 text-center text-xs text-gray-400">
-          <p>&copy; {currentYear} Soave Advocacia</p>
+        {/* Separador elegante */}
+        <div className="mt-12 pt-8 border-t border-gray-200 flex flex-col md:flex-row justify-between items-center">
+          <p className="text-gray-400 text-xs">
+            &copy; {currentYear} Soave Advocacia. Todos os direitos reservados.
+          </p>
+          <div className="mt-4 md:mt-0">
+            <a href="#" className="text-xs text-gray-400 hover:text-blue-600 transition-colors duration-300">
+              Política de Privacidade
+            </a>
+          </div>
         </div>
       </div>
     </footer>
