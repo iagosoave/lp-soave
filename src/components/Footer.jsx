@@ -1,7 +1,6 @@
 // components/Footer.jsx
 import React from 'react';
 import soave from './soave.logo.png';
-
 const Footer = () => {
   const currentYear = new Date().getFullYear();
   

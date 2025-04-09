@@ -6,6 +6,7 @@ import bannerVideo from './banner.webm';
 const HeroSection = () => {
   // State and refs
   const [isVideoLoaded, setIsVideoLoaded] = useState(false);
+  const [isMobile, setIsMobile] = useState(false);
   const sectionRef = useRef(null);
   const videoRef = useRef(null);
   const inView = useInView(sectionRef);
@@ -36,6 +37,25 @@ const HeroSection = () => {
     }
   };
   
+  // Check for mobile device
+  useEffect(() => {
+    // Function to check if device is mobile
+    const checkIfMobile = () => {
+      setIsMobile(window.innerWidth < 768);
+    };
+    
+    // Initial check
+    checkIfMobile();
+    
+    // Listen for resize events
+    window.addEventListener('resize', checkIfMobile);
+    
+    // Clean up
+    return () => {
+      window.removeEventListener('resize', checkIfMobile);
+    };
+  }, []);
+  
   // Trigger animations when in view
   useEffect(() => {
     if (inView) {
@@ -43,43 +63,62 @@ const HeroSection = () => {
     }
   }, [controls, inView]);
   
-  // Video loading and optimization
+  // Video loading and optimization - with fallback for mobile
   useEffect(() => {
+    // Always show section content after a short delay (even if video doesn't load)
+    const timer = setTimeout(() => {
+      setIsVideoLoaded(true);
+    }, 1000);
+    
     if (videoRef.current) {
       // Handle video loaded
       videoRef.current.addEventListener('loadeddata', () => {
         setIsVideoLoaded(true);
+        clearTimeout(timer); // Clear timeout if video loads properly
+      });
+      
+      // Error handling for video
+      videoRef.current.addEventListener('error', () => {
+        console.log("Video failed to load, using fallback");
+        setIsVideoLoaded(true);
+        clearTimeout(timer);
       });
       
       // Playback rate adjustment (slower on mobile for performance)
-      videoRef.current.playbackRate = window.innerWidth < 768 ? 0.4 : 0.6;
+      videoRef.current.playbackRate = isMobile ? 0.4 : 0.6;
       
       // Intersection Observer for video play/pause optimization
       const observer = new IntersectionObserver(
         ([entry]) => {
           if (entry.isIntersecting) {
             // Only auto-play on non-mobile or when not in data-saving mode
-            if (window.innerWidth >= 768 || !navigator.connection || 
-                !['slow-2g', '2g', '3g'].includes(navigator.connection.effectiveType)) {
+            if (!isMobile || !navigator.connection || 
+                !['slow-2g', '2g', '3g'].includes(navigator.connection?.effectiveType)) {
               videoRef.current.play().catch(() => {
                 // Silent catch - some browsers require user interaction first
+                console.log("Autoplay prevented");
               });
             }
           } else {
-            videoRef.current.pause();
+            videoRef.current?.pause();
           }
         },
         { threshold: 0.1 }
       );
       
-      observer.observe(sectionRef.current);
+      if (sectionRef.current) {
+        observer.observe(sectionRef.current);
+      }
       
-      // Clean up observer
+      // Clean up observer and timer
       return () => {
         observer.disconnect();
+        clearTimeout(timer);
       };
     }
-  }, []);
+    
+    return () => clearTimeout(timer);
+  }, [isMobile]);
 
   // Animation variants
   const containerVariants = {
@@ -143,10 +182,10 @@ const HeroSection = () => {
 
   // Mobile-optimized conditional rendering
   const renderVideoOrFallback = () => {
-    // For very small screens or slow connections, use a simpler background
-    if (typeof window !== 'undefined' && 
-        (window.innerWidth < 640 || 
-         (navigator.connection && ['slow-2g', '2g'].includes(navigator.connection.effectiveType)))) {
+    // For mobile or slow connections, use a simpler background
+    if (isMobile || (typeof navigator !== 'undefined' && 
+        navigator.connection && 
+        ['slow-2g', '2g'].includes(navigator.connection.effectiveType))) {
       return (
         <motion.div 
           className="absolute inset-0 bg-gradient-to-br from-gray-900 via-blue-900 to-gray-900"
@@ -180,7 +219,8 @@ const HeroSection = () => {
     <section 
       id="home" 
       ref={sectionRef}
-      className={`relative h-screen w-full overflow-hidden transition-opacity duration-700 ${isVideoLoaded ? 'opacity-100' : 'opacity-0'}`}
+      className="relative h-screen w-full overflow-hidden transition-opacity duration-700"
+      style={{ opacity: 1 }} // Force opacity to be visible always
     >
       {/* Background with video/gradient overlay */}
       <div className="absolute inset-0 z-0">
