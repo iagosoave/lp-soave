@@ -63,12 +63,12 @@ const HeroSection = () => {
     }
   }, [controls, inView]);
   
-  // Video loading and optimization - with fallback for mobile
+  // Video loading and optimization - ensuring video plays on mobile
   useEffect(() => {
     // Always show section content after a short delay (even if video doesn't load)
     const timer = setTimeout(() => {
       setIsVideoLoaded(true);
-    }, 1000);
+    }, 800);
     
     if (videoRef.current) {
       // Handle video loaded
@@ -77,28 +77,52 @@ const HeroSection = () => {
         clearTimeout(timer); // Clear timeout if video loads properly
       });
       
+      // Also listen for loadedmetadata which may fire earlier
+      videoRef.current.addEventListener('loadedmetadata', () => {
+        setIsVideoLoaded(true);
+      });
+      
       // Error handling for video
-      videoRef.current.addEventListener('error', () => {
-        console.log("Video failed to load, using fallback");
+      videoRef.current.addEventListener('error', (e) => {
+        console.log("Video failed to load, using fallback", e);
         setIsVideoLoaded(true);
         clearTimeout(timer);
       });
       
       // Playback rate adjustment (slower on mobile for performance)
-      videoRef.current.playbackRate = isMobile ? 0.4 : 0.6;
+      videoRef.current.playbackRate = isMobile ? 0.5 : 0.6;
+      
+      // Try to force play on mobile
+      const attemptAutoplay = () => {
+        if (videoRef.current) {
+          videoRef.current.play().catch(err => {
+            console.log("Initial autoplay prevented:", err);
+            // On mobile, we'll try one more time after user interaction
+            if (isMobile) {
+              const handleUserInteraction = () => {
+                videoRef.current?.play().catch(() => {
+                  // Silent final catch
+                });
+                // Remove the event listeners after first interaction
+                document.removeEventListener('touchstart', handleUserInteraction);
+                document.removeEventListener('click', handleUserInteraction);
+              };
+              
+              document.addEventListener('touchstart', handleUserInteraction, { once: true });
+              document.addEventListener('click', handleUserInteraction, { once: true });
+            }
+          });
+        }
+      };
+      
+      // Try to play immediately
+      attemptAutoplay();
       
       // Intersection Observer for video play/pause optimization
       const observer = new IntersectionObserver(
         ([entry]) => {
           if (entry.isIntersecting) {
-            // Only auto-play on non-mobile or when not in data-saving mode
-            if (!isMobile || !navigator.connection || 
-                !['slow-2g', '2g', '3g'].includes(navigator.connection?.effectiveType)) {
-              videoRef.current.play().catch(() => {
-                // Silent catch - some browsers require user interaction first
-                console.log("Autoplay prevented");
-              });
-            }
+            attemptAutoplay();
           } else {
             videoRef.current?.pause();
           }
@@ -114,6 +138,11 @@ const HeroSection = () => {
       return () => {
         observer.disconnect();
         clearTimeout(timer);
+        if (videoRef.current) {
+          videoRef.current.removeEventListener('loadeddata', () => {});
+          videoRef.current.removeEventListener('loadedmetadata', () => {});
+          videoRef.current.removeEventListener('error', () => {});
+        }
       };
     }
     
@@ -182,10 +211,10 @@ const HeroSection = () => {
 
   // Mobile-optimized conditional rendering
   const renderVideoOrFallback = () => {
-    // For mobile or slow connections, use a simpler background
-    if (isMobile || (typeof navigator !== 'undefined' && 
+    // For very slow connections only, use a simpler background
+    if (typeof navigator !== 'undefined' && 
         navigator.connection && 
-        ['slow-2g', '2g'].includes(navigator.connection.effectiveType))) {
+        ['slow-2g'].includes(navigator.connection.effectiveType)) {
       return (
         <motion.div 
           className="absolute inset-0 bg-gradient-to-br from-gray-900 via-blue-900 to-gray-900"
@@ -196,6 +225,7 @@ const HeroSection = () => {
       );
     }
     
+    // Use video for all devices, including mobile
     return (
       <motion.video
         ref={videoRef}
@@ -204,6 +234,8 @@ const HeroSection = () => {
         loop
         muted
         playsInline
+        preload="auto"
+        poster="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1 1' width='1' height='1'%3E%3Crect width='1' height='1' fill='%23101827'/%3E%3C/svg%3E"
         style={{ 
           filter: `brightness(${backgroundBrightness.get()})`,
         }}
@@ -219,7 +251,7 @@ const HeroSection = () => {
     <section 
       id="home" 
       ref={sectionRef}
-      className="relative h-screen w-full overflow-hidden transition-opacity duration-700"
+      className="relative h-screen w-full overflow-hidden bg-gray-900 transition-opacity duration-700"
       style={{ opacity: 1 }} // Force opacity to be visible always
     >
       {/* Background with video/gradient overlay */}
