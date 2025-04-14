@@ -224,7 +224,7 @@ const HeroSection = () => {
         ['slow-2g'].includes(navigator.connection.effectiveType)) {
       return (
         <motion.div 
-          className="absolute inset-0 bg-gradient-to-br from-gray-900 via-blue-900 to-gray-900"
+          className="absolute inset-0 bg-gradient-to-br from-gray-900 via-black to-gray-900"
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ duration: 0.8 }}
@@ -242,9 +242,9 @@ const HeroSection = () => {
         muted
         playsInline
         preload="auto"
-        poster="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1 1' width='1' height='1'%3E%3Crect width='1' height='1' fill='%23101827'/%3E%3C/svg%3E"
+        poster="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1 1' width='1' height='1'%3E%3Crect width='1' height='1' fill='%23101010'/%3E%3C/svg%3E"
         style={{ 
-          filter: `brightness(${backgroundBrightness.get()})`,
+          filter: `brightness(${backgroundBrightness.get() * 1.3})`, // Aumentar o brilho em 30%
           objectPosition: isMobile ? 'center center' : 'center center',
           transformOrigin: 'center center',
           transform: isMobile ? 'scale(1.2)' : 'none',
@@ -263,12 +263,12 @@ const HeroSection = () => {
     <section 
       id="home" 
       ref={sectionRef}
-      className="relative h-screen w-full overflow-hidden bg-gray-900 transition-opacity duration-700"
+      className="relative h-screen w-full overflow-hidden bg-black transition-opacity duration-700"
       style={{ opacity: 1 }} // Force opacity to be visible always
     >
       {/* Background with video/gradient overlay */}
       <div className="absolute inset-0 z-0">
-        {/* Gradient overlay */}
+        {/* Gradient overlay - menos opaco para mais luz */}
         <motion.div 
           className="absolute inset-0 z-10"
           initial={{ opacity: 0 }}
@@ -276,16 +276,16 @@ const HeroSection = () => {
           transition={{ duration: 1 }}
           style={{
             background: isMobile 
-              ? `linear-gradient(135deg, rgba(0, 0, 0, 0.85) 0%, rgba(0, 0, 0, 0.75) 50%, rgba(0, 0, 0, 0.7) 100%)` 
-              : `linear-gradient(135deg, rgba(0, 0, 0, 0.95) 0%, rgba(0, 0, 0, 0.85) 50%, rgba(0, 0, 0, 0.75) 100%)`
+              ? `linear-gradient(135deg, rgba(0, 0, 0, 0.75) 0%, rgba(0, 0, 0, 0.65) 50%, rgba(0, 0, 0, 0.6) 100%)` 
+              : `linear-gradient(135deg, rgba(0, 0, 0, 0.8) 0%, rgba(0, 0, 0, 0.7) 50%, rgba(0, 0, 0, 0.65) 100%)`
           }}
         />
         
-        {/* Dynamic radial highlight using Framer Motion */}
+        {/* Dynamic radial highlight using Framer Motion - mais visível */}
         <motion.div 
-          className="absolute inset-0 z-10 opacity-20"
+          className="absolute inset-0 z-10 opacity-30"
           style={{
-            background: `radial-gradient(circle at ${radialGradientX} ${radialGradientY}, rgba(37, 99, 235, 0.2) 0%, transparent 70%)`
+            background: `radial-gradient(circle at ${radialGradientX} ${radialGradientY}, rgba(85, 89, 92, 0.35) 0%, transparent 75%)`
           }}
         />
         
@@ -334,29 +334,23 @@ const HeroSection = () => {
         >
           {/* Accent bar */}
           <motion.div 
-            className="w-20 h-0.5 bg-gradient-to-r from-blue-300 to-blue-500 mb-8 rounded-full opacity-80"
+            className="w-20 h-0.5 bg-gradient-to-r from-[#6f7377] to-[#6f7377] mb-8 rounded-full opacity-80"
             variants={accentBarVariants}
             style={{ transformOrigin: 'left' }}
           />
         
-          {/* Typography section */}
+          {/* Typography section - Single line title with mais contraste */}
+          
           <motion.h1 
             className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-light leading-tight mb-6 md:mb-8"
             variants={containerVariants}
           >
             <motion.span 
-              className="bg-clip-text text-transparent bg-gradient-to-r from-blue-300 to-blue-100 font-normal block mb-2"
               variants={itemVariants}
-              style={{ 
-                WebkitBackgroundClip: 'text'
-              }}
             >
-              Advocacia especializada
-            </motion.span>
-            <motion.span className="block drop-shadow-md relative" variants={itemVariants}>
-              em direito civil e empresarial
+              <span className="text-[#a1a5a9]">Advocacia</span> <span className="text-white font-normal">Full Service</span>
               <motion.span 
-                className="absolute -bottom-3 left-0 w-24 h-px bg-gradient-to-r from-blue-300/30 to-transparent"
+                className="block h-px w-44 bg-gradient-to-r from-white/60 to-transparent mt-3"
                 initial={{ scaleX: 0, opacity: 0 }}
                 animate={{ scaleX: 1, opacity: 1 }}
                 transition={{ delay: 1, duration: 0.8 }}
@@ -364,20 +358,19 @@ const HeroSection = () => {
               />
             </motion.span>
           </motion.h1>
-          
           <motion.p 
             className="text-lg sm:text-xl md:text-2xl font-light mb-10 md:mb-12 text-gray-200 max-w-2xl"
             variants={itemVariants}
           >
             Mais de <span className="relative inline-block">
               <motion.span 
-                className="text-blue-300 font-medium"
+                className="text-[#8c9297] font-medium"
                 whileHover={{ 
-                  color: '#93c5fd'
+                  color: '#a1a5a9'
                 }}
-              >40 anos</motion.span>
+              >4 décadas</motion.span>
               <motion.span 
-                className="absolute -bottom-1 left-0 w-full h-px bg-gradient-to-r from-blue-300/50 to-transparent"
+                className="absolute -bottom-1 left-0 w-full h-px bg-gradient-to-r from-[#6f7377]/70 to-transparent"
                 initial={{ scaleX: 0 }}
                 animate={{ scaleX: 1 }}
                 transition={{ delay: 1.4, duration: 0.6 }}
@@ -387,63 +380,61 @@ const HeroSection = () => {
           </motion.p>
           
           <motion.div 
-  className="flex flex-col sm:flex-row gap-5 mb-10 sm:mb-14"
-  variants={containerVariants}
->
-  {/* Primary CTA - WhatsApp */}
-  <motion.a
-    href="https://wa.me/5515997160075"
-    target="_blank"
-    rel="noopener noreferrer"
-    className="group relative z-10 inline-flex items-center justify-center px-8 py-4 text-white text-base font-medium rounded-sm overflow-hidden"
-    variants={itemVariants}
-    whileHover={{ scale: 1.03 }}
-    whileTap={{ scale: 0.98 }}
-    style={{
-      background: 'linear-gradient(135deg, #1e40af 0%, #1e3a8a 100%)'
-    }}
-  >
-    {/* Button glow effect */}
-    <motion.span 
-      className="absolute -inset-1 bg-blue-400/20 blur-xl rounded-full opacity-0"
-      initial={{ opacity: 0, scale: 0 }}
-      whileHover={{ opacity: 0.5, scale: 1 }}
-      transition={{ duration: 0.4 }}
-    />
-    
-    <motion.svg 
-      xmlns="http://www.w3.org/2000/svg" 
-      className="h-5 w-5 mr-2" 
-      viewBox="0 0 448 512" 
-      fill="currentColor"
-      whileHover={{ scale: 1.1 }}
-    >
-      <path d="M380.9 97.1C339 55.1 283.2 32 223.9 32c-122.4 0-222 99.6-222 222 0 39.1 10.2 77.3 29.6 111L0 480l117.7-30.9c32.4 17.7 68.9 27 106.1 27h.1c122.3 0 224.1-99.6 224.1-222 0-59.3-25.2-115-67.1-157zm-157 341.6c-33.2 0-65.7-8.9-94-25.7l-6.7-4-69.8 18.3L72 359.2l-4.4-7c-18.5-29.4-28.2-63.3-28.2-98.2 0-101.7 82.8-184.5 184.6-184.5 49.3 0 95.6 19.2 130.4 54.1 34.8 34.9 56.2 81.2 56.1 130.5 0 101.8-84.9 184.6-186.6 184.6zm101.2-138.2c-5.5-2.8-32.8-16.2-37.9-18-5.1-1.9-8.8-2.8-12.5 2.8-3.7 5.6-14.3 18-17.6 21.8-3.2 3.7-6.5 4.2-12 1.4-32.6-16.3-54-29.1-75.5-66-5.7-9.8 5.7-9.1 16.3-30.3 1.8-3.7.9-6.9-.5-9.7-1.4-2.8-12.5-30.1-17.1-41.2-4.5-10.8-9.1-9.3-12.5-9.5-3.2-.2-6.9-.2-10.6-.2-3.7 0-9.7 1.4-14.8 6.9-5.1 5.6-19.4 19-19.4 46.3 0 27.3 19.9 53.7 22.6 57.4 2.8 3.7 39.1 59.7 94.8 83.8 35.2 15.2 49 16.5 66.6 13.9 10.7-1.6 32.8-13.4 37.4-26.4 4.6-13 4.6-24.1 3.2-26.4-1.3-2.5-5-3.9-10.5-6.6z"/>
-    </motion.svg>
-    <span className="relative z-10 inline-flex items-center">
-      WhatsApp
-      <motion.span 
-        className="ml-1.5 inline-block w-1.5 h-1.5 rounded-full bg-white/80"
-        animate={{ scale: [1, 1.5, 1], opacity: [1, 0.5, 1] }}
-        transition={{ duration: 1.5, repeat: Infinity }}
-      />
-    </span>
-  </motion.a>
+            className="flex flex-col sm:flex-row gap-5 mb-10 sm:mb-14"
+            variants={containerVariants}
+          >
+            {/* Primary CTA - WhatsApp */}
+            <motion.a
+              href="https://wa.me/5515997160075"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="group relative z-10 inline-flex items-center justify-center px-8 py-4 text-white text-base font-medium rounded-sm overflow-hidden"
+              variants={itemVariants}
+              whileHover={{ scale: 1.03 }}
+              whileTap={{ scale: 0.98 }}
+              style={{
+                background: 'linear-gradient(135deg, #4e5156 0%, #2a2d30 100%)'
+              }}
+            >
+              {/* Button glow effect */}
+              <motion.span 
+                className="absolute -inset-1 bg-[#6f7377]/30 blur-xl rounded-full opacity-0"
+                initial={{ opacity: 0, scale: 0 }}
+                whileHover={{ opacity: 0.6, scale: 1 }}
+                transition={{ duration: 0.4 }}
+              />
+              
+              <motion.svg 
+                xmlns="http://www.w3.org/2000/svg" 
+                className="h-5 w-5 mr-2" 
+                viewBox="0 0 448 512" 
+                fill="currentColor"
+                whileHover={{ scale: 1.1 }}
+              >
+                <path d="M380.9 97.1C339 55.1 283.2 32 223.9 32c-122.4 0-222 99.6-222 222 0 39.1 10.2 77.3 29.6 111L0 480l117.7-30.9c32.4 17.7 68.9 27 106.1 27h.1c122.3 0 224.1-99.6 224.1-222 0-59.3-25.2-115-67.1-157zm-157 341.6c-33.2 0-65.7-8.9-94-25.7l-6.7-4-69.8 18.3L72 359.2l-4.4-7c-18.5-29.4-28.2-63.3-28.2-98.2 0-101.7 82.8-184.5 184.6-184.5 49.3 0 95.6 19.2 130.4 54.1 34.8 34.9 56.2 81.2 56.1 130.5 0 101.8-84.9 184.6-186.6 184.6zm101.2-138.2c-5.5-2.8-32.8-16.2-37.9-18-5.1-1.9-8.8-2.8-12.5 2.8-3.7 5.6-14.3 18-17.6 21.8-3.2 3.7-6.5 4.2-12 1.4-32.6-16.3-54-29.1-75.5-66-5.7-9.8 5.7-9.1 16.3-30.3 1.8-3.7.9-6.9-.5-9.7-1.4-2.8-12.5-30.1-17.1-41.2-4.5-10.8-9.1-9.3-12.5-9.5-3.2-.2-6.9-.2-10.6-.2-3.7 0-9.7 1.4-14.8 6.9-5.1 5.6-19.4 19-19.4 46.3 0 27.3 19.9 53.7 22.6 57.4 2.8 3.7 39.1 59.7 94.8 83.8 35.2 15.2 49 16.5 66.6 13.9 10.7-1.6 32.8-13.4 37.4-26.4 4.6-13 4.6-24.1 3.2-26.4-1.3-2.5-5-3.9-10.5-6.6z"/>
+              </motion.svg>
+              <span className="relative z-10 inline-flex items-center">
+                WhatsApp
+                <motion.span 
+                  className="ml-1.5 inline-block w-1.5 h-1.5 rounded-full bg-white/80"
+                  animate={{ scale: [1, 1.5, 1], opacity: [1, 0.5, 1] }}
+                  transition={{ duration: 1.5, repeat: Infinity }}
+                />
+              </span>
+            </motion.a>
 
-
-            
             {/* Secondary CTA - Services */}
             <motion.a
               href="#areas"
-              className="group relative inline-flex items-center justify-center px-8 py-4 text-white bg-transparent backdrop-blur-sm text-base font-medium rounded-sm border border-white/10 overflow-hidden"
+              className="group relative inline-flex items-center justify-center px-8 py-4 text-white bg-transparent backdrop-blur-sm text-base font-medium rounded-sm border border-white/20 overflow-hidden"
               variants={itemVariants}
               whileHover={{ 
                 scale: 1.03, 
-                borderColor: 'rgba(59, 130, 246, 0.5)'
+                borderColor: 'rgba(160, 164, 168, 0.5)'
               }}
               whileTap={{ scale: 0.98 }}
               style={{
-                background: 'linear-gradient(135deg, rgba(59, 130, 246, 0.05) 0%, rgba(37, 99, 235, 0.1) 100%)'
+                background: 'linear-gradient(135deg, rgba(85, 89, 92, 0.15) 0%, rgba(20, 20, 20, 0.2) 100%)'
               }}
             >
               {/* Edge highlight effects */}
@@ -453,7 +444,7 @@ const HeroSection = () => {
                 whileHover={{ opacity: 1 }}
               >
                 <motion.span 
-                  className="absolute top-0 left-0 w-full h-px bg-gradient-to-r from-transparent via-blue-300/50 to-transparent"
+                  className="absolute top-0 left-0 w-full h-px bg-gradient-to-r from-transparent via-[#8c9297]/60 to-transparent"
                   initial={{ x: '-100%' }}
                   whileHover={{ 
                     x: '100%',
@@ -461,7 +452,7 @@ const HeroSection = () => {
                   }}
                 />
                 <motion.span 
-                  className="absolute bottom-0 right-0 w-full h-px bg-gradient-to-r from-transparent via-blue-300/50 to-transparent"
+                  className="absolute bottom-0 right-0 w-full h-px bg-gradient-to-r from-transparent via-[#8c9297]/60 to-transparent"
                   initial={{ x: '100%' }}
                   whileHover={{ 
                     x: '-100%',
@@ -497,10 +488,10 @@ const HeroSection = () => {
             >
               <motion.svg 
                 xmlns="http://www.w3.org/2000/svg" 
-                className="h-5 w-5 text-blue-300 mr-2" 
+                className="h-5 w-5 text-[#8c9297] mr-2" 
                 viewBox="0 0 20 20" 
                 fill="currentColor"
-                whileHover={{ color: '#93c5fd' }}
+                whileHover={{ color: '#a1a5a9' }}
               >
                 <path fillRule="evenodd" d="M6.267 3.455a3.066 3.066 0 001.745-.723 3.066 3.066 0 013.976 0 3.066 3.066 0 001.745.723 3.066 3.066 0 012.812 2.812c.051.643.304 1.254.723 1.745a3.066 3.066 0 010 3.976 3.066 3.066 0 00-.723 1.745 3.066 3.066 0 01-2.812 2.812 3.066 3.066 0 00-1.745.723 3.066 3.066 0 01-3.976 0 3.066 3.066 0 00-1.745-.723 3.066 3.066 0 01-2.812-2.812 3.066 3.066 0 00-.723-1.745 3.066 3.066 0 010-3.976 3.066 3.066 0 00.723-1.745 3.066 3.066 0 012.812-2.812zm7.44 5.252a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd" />
               </motion.svg>
@@ -514,10 +505,10 @@ const HeroSection = () => {
             >
               <motion.svg 
                 xmlns="http://www.w3.org/2000/svg" 
-                className="h-5 w-5 text-blue-300 mr-2" 
+                className="h-5 w-5 text-[#8c9297] mr-2" 
                 viewBox="0 0 20 20" 
                 fill="currentColor"
-                whileHover={{ color: '#93c5fd' }}
+                whileHover={{ color: '#a1a5a9' }}
               >
                 <path d="M9 6a3 3 0 11-6 0 3 3 0 016 0zM17 6a3 3 0 11-6 0 3 3 0 016 0zM12.93 17c.046-.327.07-.66.07-1a6.97 6.97 0 00-1.5-4.33A5 5 0 0119 16v1h-6.07zM6 11a5 5 0 015 5v1H1v-1a5 5 0 015-5z" />
               </motion.svg>
@@ -533,10 +524,10 @@ const HeroSection = () => {
             >
               <motion.svg 
                 xmlns="http://www.w3.org/2000/svg" 
-                className="h-5 w-5 text-blue-300 mr-2" 
+                className="h-5 w-5 text-[#8c9297] mr-2" 
                 viewBox="0 0 20 20" 
                 fill="currentColor"
-                whileHover={{ color: '#93c5fd' }}
+                whileHover={{ color: '#a1a5a9' }}
               >
                 <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
               </motion.svg>
@@ -579,7 +570,7 @@ const HeroSection = () => {
             className="absolute bottom-6 left-1/2 transform -translate-x-1/2 z-20 text-white/80 hover:text-white bg-transparent border-none cursor-pointer outline-none"
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
-            transition={{ delay: 1.5 }}
+            transitiontransition={{ delay: 1.5 }}
             exit={{ opacity: 0 }}
             whileHover={{ scale: 1.2 }}
             aria-label="Rolar para baixo"

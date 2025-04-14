@@ -6,7 +6,7 @@ const Footer = () => {
   const currentYear = new Date().getFullYear();
   
   return (
-    <footer className="bg-gradient-to-b from-white to-gray-50 text-gray-600 border-t border-gray-200">
+    <footer className="bg-[#55595c] text-gray-200">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 py-12 md:py-16">
         {/* Conteúdo principal do footer */}
         <div className="grid grid-cols-1 md:grid-cols-12 gap-8 md:gap-10">
@@ -19,32 +19,32 @@ const Footer = () => {
                 className="h-16 md:h-20 w-auto object-contain"
               />
             </div>
-            <p className="text-gray-500 text-sm leading-relaxed max-w-xs text-left mt-2">
+            <p className="text-gray-300 text-sm leading-relaxed max-w-xs text-left mt-2">
               Excelência jurídica personalizada com foco em resultados e atendimento humanizado.
             </p>
           </div>
           
           {/* Links rápidos */}
           <div className="md:col-span-3 flex flex-col items-start">
-            <h3 className="text-sm font-semibold uppercase tracking-wider text-gray-900 mb-3 md:mb-4">Links Rápidos</h3>
+            <h3 className="text-sm font-semibold uppercase tracking-wider text-white mb-3 md:mb-4">Links Rápidos</h3>
             <ul className="space-y-2 md:space-y-3">
               <li>
-                <a href="#inicio" className="text-gray-500 hover:text-blue-600 transition-colors duration-300 text-sm">
+                <a href="#inicio" className="text-gray-300 hover:text-white transition-colors duration-300 text-sm">
                   Início
                 </a>
               </li>
               <li>
-                <a href="#sobre" className="text-gray-500 hover:text-blue-600 transition-colors duration-300 text-sm">
+                <a href="#sobre" className="text-gray-300 hover:text-white transition-colors duration-300 text-sm">
                   Sobre Nós
                 </a>
               </li>
               <li>
-                <a href="#areas" className="text-gray-500 hover:text-blue-600 transition-colors duration-300 text-sm">
+                <a href="#areas" className="text-gray-300 hover:text-white transition-colors duration-300 text-sm">
                   Áreas de Atuação
                 </a>
               </li>
               <li>
-                <a href="#localizacao" className="text-gray-500 hover:text-blue-600 transition-colors duration-300 text-sm">
+                <a href="#localizacao" className="text-gray-300 hover:text-white transition-colors duration-300 text-sm">
                   Localização
                 </a>
               </li>
@@ -53,17 +53,17 @@ const Footer = () => {
           
           {/* Informações de contato */}
           <div className="md:col-span-3 flex flex-col items-start">
-            <h3 className="text-sm font-semibold uppercase tracking-wider text-gray-900 mb-3 md:mb-4">Contato</h3>
+            <h3 className="text-sm font-semibold uppercase tracking-wider text-white mb-3 md:mb-4">Contato</h3>
             <div className="space-y-2 md:space-y-3">
               <div className="flex items-start">
                 <div className="flex-shrink-0 mt-1">
-                  <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4 text-blue-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
                   </svg>
                 </div>
                 <div className="ml-3">
-                  <p className="text-gray-500 text-sm leading-relaxed">
+                  <p className="text-gray-300 text-sm leading-relaxed">
                     Rua José Maria Hanickel, 150<br />
                     Conj. 71 - Edifício Tokyo<br />
                     Sorocaba/SP - CEP 18047-360
@@ -73,12 +73,12 @@ const Footer = () => {
               
               <div className="flex items-start">
                 <div className="flex-shrink-0 mt-1">
-                  <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4 text-blue-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z" />
                   </svg>
                 </div>
                 <div className="ml-3">
-                  <a href="tel:+5515997160075" className="text-gray-500 hover:text-blue-600 transition-colors duration-300 text-sm">
+                  <a href="tel:+5515997160075" className="text-gray-300 hover:text-white transition-colors duration-300 text-sm">
                     (15) 99716-0075
                   </a>
                 </div>
@@ -86,12 +86,12 @@ const Footer = () => {
               
               <div className="flex items-start">
                 <div className="flex-shrink-0 mt-1">
-                  <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4 text-blue-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
                   </svg>
                 </div>
                 <div className="ml-3">
-                  <a href="mailto:contato@soaveadvocacia.com.br" className="text-gray-500 hover:text-blue-600 transition-colors duration-300 text-sm break-all">
+                  <a href="mailto:contato@soaveadvocacia.com.br" className="text-gray-300 hover:text-white transition-colors duration-300 text-sm break-all">
                     contato@soaveadvocacia.com.br
                   </a>
                 </div>
@@ -101,13 +101,13 @@ const Footer = () => {
           
           {/* Horário de atendimento e redes sociais */}
           <div className="md:col-span-2 flex flex-col items-start">
-            <h3 className="text-sm font-semibold uppercase tracking-wider text-gray-900 mb-3 md:mb-4">Siga-nos</h3>
+            <h3 className="text-sm font-semibold uppercase tracking-wider text-white mb-3 md:mb-4">Siga-nos</h3>
             <div className="flex space-x-3 mb-6">
               <a 
                 href="https://www.facebook.com/SoaveAdvocacia/" 
                 target="_blank" 
                 rel="noopener noreferrer"
-                className="w-8 h-8 flex items-center justify-center rounded-full bg-white border border-gray-200 text-blue-600 hover:bg-blue-50 hover:border-blue-100 transition-all duration-300 shadow-sm"
+                className="w-8 h-8 flex items-center justify-center rounded-full bg-black/20 text-white hover:bg-black/40 transition-all duration-300 shadow-sm"
                 aria-label="Facebook"
               >
                 <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
@@ -119,7 +119,7 @@ const Footer = () => {
                 href="https://www.instagram.com/soaveadvocacia/" 
                 target="_blank" 
                 rel="noopener noreferrer"
-                className="w-8 h-8 flex items-center justify-center rounded-full bg-white border border-gray-200 text-blue-600 hover:bg-blue-50 hover:border-blue-100 transition-all duration-300 shadow-sm"
+                className="w-8 h-8 flex items-center justify-center rounded-full bg-black/20 text-white hover:bg-black/40 transition-all duration-300 shadow-sm"
                 aria-label="Instagram"
               >
                 <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
@@ -128,18 +128,18 @@ const Footer = () => {
               </a>
             </div>
             
-            <h3 className="text-sm font-semibold uppercase tracking-wider text-gray-900 mb-3 md:mb-4">Horário</h3>
-            <p className="text-gray-500 text-sm">xxxx</p>
+            <h3 className="text-sm font-semibold uppercase tracking-wider text-white mb-3 md:mb-4">Horário</h3>
+            <p className="text-gray-300 text-sm">Segunda a Sexta: 9h às 18h</p>
           </div>
         </div>
         
         {/* Separador elegante */}
-        <div className="mt-10 md:mt-12 pt-6 md:pt-8 border-t border-gray-200 flex flex-col md:flex-row justify-between items-start md:items-center">
-          <p className="text-gray-400 text-xs">
+        <div className="mt-10 md:mt-12 pt-6 md:pt-8 border-t border-black/20 flex flex-col md:flex-row justify-between items-start md:items-center">
+          <p className="text-gray-300 text-xs">
             &copy; {currentYear} Soave Advocacia. Todos os direitos reservados.
           </p>
           <div className="mt-3 md:mt-0">
-            <a href="#" className="text-xs text-gray-400 hover:text-blue-600 transition-colors duration-300">
+            <a href="#" className="text-xs text-gray-300 hover:text-white transition-colors duration-300">
               Política de Privacidade
             </a>
           </div>

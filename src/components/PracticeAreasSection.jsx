@@ -96,7 +96,7 @@ const PracticeAreasSection = () => {
       id: 'medico',
       title: 'Direito Médico',
       icon: <HeartPulse className="h-6 w-6" />,
-      description: 'Contamos com equipe especializada em Direito Médico para mediar questões jurídicas envolvendo a prática médica e serviços de saúde, defendendo os interesses de profissionais de saúde, pacientes e instituições.'
+      description: 'Contamos com conhecimento especializado em Direito Médico para mediar questões jurídicas envolvendo a prática médica e serviços de saúde, defendendo os interesses de profissionais de saúde, pacientes e instituições'
     },
     {
       id: 'familia',
@@ -114,7 +114,7 @@ const PracticeAreasSection = () => {
       id: 'previdenciario',
       title: 'Previdenciário',
       icon: <Clock className="h-6 w-6" />,
-      description: 'Nossa equipe oferece um serviço ao cliente prático e ágil no ambito previdenciário, buscando a implementação de benefícios dos mais variados tipos, além de auxílio e planejamento da aposentadoria.'
+      description: 'Oferecemos ao cliente um serviço prático e ágil no ambito previdenciário, buscando a implementação de benefícios dos mais variados tipos, além de auxílio e planejamento da aposentadoria.'
     },
     {
       id: 'tributario',
@@ -190,7 +190,7 @@ const PracticeAreasSection = () => {
       particles.push(
         <motion.div
           key={`particle-${i}`}
-          className="absolute w-2 h-2 rounded-full bg-blue-200 opacity-30"
+          className="absolute w-2 h-2 rounded-full bg-gray-200 opacity-30"
           style={{
             top: `${Math.random() * 100}%`,
             left: `${Math.random() * 100}%`,
@@ -218,18 +218,18 @@ const PracticeAreasSection = () => {
       ref={sectionRef}
     >
       {/* Elementos de design de fundo aprimorados - simplificados para mobile */}
-      <div className="absolute top-0 left-0 right-0 h-1/3 bg-gradient-to-b from-blue-50 to-transparent opacity-70"></div>
+      <div className="absolute top-0 left-0 right-0 h-1/3 bg-gradient-to-b from-gray-100 to-transparent opacity-70"></div>
       
       {/* Limitar efeitos de fundo em dispositivos móveis */}
       {!isMobile && (
         <>
-          <div className="absolute top-20 left-10 w-64 h-64 rounded-full bg-blue-50 blur-3xl opacity-40"></div>
+          <div className="absolute top-20 left-10 w-64 h-64 rounded-full bg-gray-100 blur-3xl opacity-40"></div>
           <div className="absolute bottom-20 right-10 w-80 h-80 rounded-full bg-gray-100 blur-3xl opacity-50"></div>
-          <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-full h-full bg-gradient-to-br from-blue-50/10 via-transparent to-gray-50/20"></div>
+          <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-full h-full bg-gradient-to-br from-gray-100/10 via-transparent to-gray-50/20"></div>
           
           {/* Linhas decorativas - apenas para desktop */}
           <motion.div 
-            className="absolute top-40 left-0 h-px w-full bg-gradient-to-r from-transparent via-blue-200 to-transparent opacity-30"
+            className="absolute top-40 left-0 h-px w-full bg-gradient-to-r from-transparent via-gray-300 to-transparent opacity-30"
             animate={{ 
               opacity: [0.2, 0.4, 0.2]
             }}
@@ -271,7 +271,7 @@ const PracticeAreasSection = () => {
           >
             {/* Elementos decorativos ao redor do título - simplificados para mobile */}
             <motion.div 
-              className="absolute -top-6 left-1/2 transform -translate-x-1/2 w-12 h-1 bg-gradient-to-r from-blue-300 via-blue-500 to-blue-300"
+              className="absolute -top-6 left-1/2 transform -translate-x-1/2 w-12 h-1 bg-gradient-to-r from-[#55595c] via-[#55595c] to-[#55595c]"
               initial={{ width: 0, opacity: 0 }}
               animate={isInView ? { width: 48, opacity: 1 } : { width: 0, opacity: 0 }}
               transition={{ delay: isMobile ? 0.1 : 0.2, duration: isMobile ? 0.5 : 0.8 }}
@@ -289,7 +289,7 @@ const PracticeAreasSection = () => {
                   } : {}}
                   transition={{ delay: 0.6, duration: 1 }}
                 >
-                  <div className="w-full h-full rounded-full bg-blue-200 animate-ping opacity-30 duration-1000"></div>
+                  <div className="w-full h-full rounded-full bg-gray-300 animate-ping opacity-30 duration-1000"></div>
                 </motion.div>
                 
                 <motion.div
@@ -301,7 +301,7 @@ const PracticeAreasSection = () => {
                   } : {}}
                   transition={{ delay: 0.9, duration: 1 }}
                 >
-                  <div className="w-full h-full rounded-full bg-blue-200 animate-ping opacity-30 duration-800 delay-700"></div>
+                  <div className="w-full h-full rounded-full bg-gray-300 animate-ping opacity-30 duration-800 delay-700"></div>
                 </motion.div>
               </>
             )}
@@ -316,7 +316,7 @@ const PracticeAreasSection = () => {
                 // Simplificar animação em dispositivos móveis
                 textShadow: isMobile ? undefined : [
                   '0px 0px 0px rgba(0,0,0,0)', 
-                  '0px 0px 8px rgba(59,130,246,0.2)', 
+                  '0px 0px 8px rgba(85,89,92,0.2)', 
                   '0px 0px 0px rgba(0,0,0,0)'
                 ]
               } : {}}
@@ -335,7 +335,7 @@ const PracticeAreasSection = () => {
             
             {/* Subtítulo alinhado diretamente abaixo do título, no mesmo container */}
             <motion.span 
-              className="text-xs text-blue-600 font-medium tracking-widest block mt-1 text-center"
+              className="text-xs text-[#55595c] font-medium tracking-widest block mt-1 text-center"
               initial={{ opacity: 0, y: 5 }}
               animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 5 }}
               transition={{ delay: isMobile ? 0.2 : 0.4, duration: isMobile ? 0.4 : 0.6 }}
@@ -346,7 +346,7 @@ const PracticeAreasSection = () => {
           
           {/* Linha decorativa animada - centralizada adequadamente */}
           <motion.div 
-            className="h-px bg-gradient-to-r from-transparent via-blue-700 to-transparent mx-auto mt-6 md:mt-8 w-16"
+            className="h-px bg-gradient-to-r from-transparent via-[#55595c] to-transparent mx-auto mt-6 md:mt-8 w-16"
             variants={lineVariants}
             animate={isInView ? { 
               width: ["0%", "4rem", "4rem"],
@@ -381,13 +381,13 @@ const PracticeAreasSection = () => {
             >
               {/* Efeito de gradiente na borda superior */}
               <div 
-                className={`h-1 w-full absolute top-0 left-0 right-0 transition-all duration-300 ease-in-out ${activeCard === area.id ? 'bg-gradient-to-r from-blue-400 via-blue-600 to-blue-800' : 'bg-gradient-to-r from-gray-200 via-gray-300 to-gray-200'}`}
+                className={`h-1 w-full absolute top-0 left-0 right-0 transition-all duration-300 ease-in-out ${activeCard === area.id ? 'bg-gradient-to-r from-[#55595c] via-[#55595c] to-[#55595c]' : 'bg-gradient-to-r from-gray-200 via-gray-300 to-gray-200'}`}
               ></div>
               
               {/* Efeito de brilho ao passar o mouse - simplificado para mobile */}
               {!isMobile && (
                 <div 
-                  className={`absolute -inset-px bg-gradient-to-r from-blue-400 to-blue-600 opacity-0 ${activeCard === area.id ? 'opacity-10' : 'group-hover:opacity-5'} transition-opacity duration-700 rounded-lg blur-md`}
+                  className={`absolute -inset-px bg-gradient-to-r from-[#55595c] to-[#55595c] opacity-0 ${activeCard === area.id ? 'opacity-10' : 'group-hover:opacity-5'} transition-opacity duration-700 rounded-lg blur-md`}
                 ></div>
               )}
               
@@ -395,10 +395,10 @@ const PracticeAreasSection = () => {
                 {/* Ícone animado com design aprimorado */}
                 <div className="flex items-center mb-5 md:mb-6">
                   <div 
-                    className={`relative w-14 h-14 md:w-16 md:h-16 rounded-xl flex items-center justify-center mr-4 md:mr-5 transition-all duration-300 ease-in-out ${activeCard === area.id ? 'bg-gradient-to-br from-blue-50 to-blue-100 text-blue-600 shadow-md' : 'bg-gray-50 text-gray-500'}`}
+                    className={`relative w-14 h-14 md:w-16 md:h-16 rounded-xl flex items-center justify-center mr-4 md:mr-5 transition-all duration-300 ease-in-out ${activeCard === area.id ? 'bg-gradient-to-br from-gray-50 to-gray-100 text-[#55595c] shadow-md' : 'bg-gray-50 text-gray-500'}`}
                   >
                     {/* Efeitos de decoração simplificados */}
-                    <div className={`absolute inset-0 bg-gradient-to-tr from-blue-200/0 via-blue-400/10 to-transparent rounded-xl opacity-0 transition-opacity duration-300 ${activeCard === area.id ? 'opacity-100' : ''}`}></div>
+                    <div className={`absolute inset-0 bg-gradient-to-tr from-gray-200/0 via-gray-400/10 to-transparent rounded-xl opacity-0 transition-opacity duration-300 ${activeCard === area.id ? 'opacity-100' : ''}`}></div>
                     
                     {/* Ícone com animação simplificada */}
                     <div className="relative z-10">
@@ -408,14 +408,14 @@ const PracticeAreasSection = () => {
                   
                   <div>
                     <h3 
-                      className={`text-lg md:text-xl font-medium transition-colors duration-300 tracking-wide ${activeCard === area.id ? 'text-blue-800' : 'text-gray-900'}`}
+                      className={`text-lg md:text-xl font-medium transition-colors duration-300 tracking-wide ${activeCard === area.id ? 'text-[#55595c]' : 'text-gray-900'}`}
                     >
                       {area.title}
                     </h3>
                     
                     {activeCard === area.id && (
                       <motion.div 
-                        className="h-0.5 bg-gradient-to-r from-transparent via-blue-500 to-transparent rounded-full mt-1.5"
+                        className="h-0.5 bg-gradient-to-r from-transparent via-[#55595c] to-transparent rounded-full mt-1.5"
                         initial={{ width: 0, opacity: 0 }}
                         animate={{ width: "100%", opacity: 1 }}
                         transition={{ duration: 0.3 }}
@@ -436,8 +436,8 @@ const PracticeAreasSection = () => {
                   {activeCard === area.id && (
                     <div className="mt-3">
                       <div className="flex items-center space-x-2">
-                        <div className="h-1 w-1 rounded-full bg-blue-500" />
-                        <span className="text-xs text-blue-700 font-medium">Expertise especializada</span>
+                        <div className="h-1 w-1 rounded-full bg-[#55595c]" />
+                        <span className="text-xs text-[#55595c] font-medium">Expertise especializada</span>
                       </div>
                     </div>
                   )}
@@ -452,7 +452,7 @@ const PracticeAreasSection = () => {
                 {activeCard === area.id && (
                   <div className="mt-4 flex justify-end items-center">
                     <motion.div 
-                      className="h-1 w-1/4 bg-blue-500 rounded-full"
+                      className="h-1 w-1/4 bg-[#55595c] rounded-full"
                       initial={{ width: 0 }}
                       animate={{ width: "25%" }}
                       transition={{ duration: 0.3 }}
@@ -475,7 +475,7 @@ const PracticeAreasSection = () => {
             transition={{ delay: 0.5, duration: 0.6 }}
           >
             <motion.div 
-              className="h-0.5 w-4 bg-blue-400 mx-1 rounded-full"
+              className="h-0.5 w-4 bg-[#55595c] mx-1 rounded-full"
               animate={{ width: [4, 16, 4] }}
               transition={{ 
                 duration: 2,
@@ -485,7 +485,7 @@ const PracticeAreasSection = () => {
               }}
             ></motion.div>
             <motion.div 
-              className="h-0.5 w-8 bg-blue-600 mx-1 rounded-full"
+              className="h-0.5 w-8 bg-[#55595c] mx-1 rounded-full"
               animate={{ width: [8, 32, 8] }}
               transition={{ 
                 duration: 3,
@@ -496,7 +496,7 @@ const PracticeAreasSection = () => {
               }}
             ></motion.div>
             <motion.div 
-              className="h-0.5 w-4 bg-blue-400 mx-1 rounded-full"
+              className="h-0.5 w-4 bg-[#55595c] mx-1 rounded-full"
               animate={{ width: [4, 16, 4] }}
               transition={{ 
                 duration: 2,

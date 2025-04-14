@@ -1,25 +1,21 @@
 import React, { useState, useEffect } from 'react';
-import { Menu, X, Instagram, Facebook, Phone } from 'lucide-react';
+import { Menu, X, Instagram, Facebook } from 'lucide-react';
 import soaveLogo from './soave.logo.png';
 
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
   const [activeItem, setActiveItem] = useState('home');
+  const [lastScrollY, setLastScrollY] = useState(0);
+  const [visible, setVisible] = useState(true);
   
-  // Detectar scroll e seção ativa
   useEffect(() => {
     const handleScroll = () => {
-      // Efeito de sombra
-      if (window.scrollY > 50) {
-        setScrolled(true);
-      } else {
-        setScrolled(false);
-      }
+      const currentScrollY = window.scrollY;
       
-      // Detectar seção atual para navegação ativa
+      // Detectar seção ativa
       const sections = navItems.map(item => item.href.substring(1));
-      const scrollPosition = window.scrollY + 100;
+      const scrollPosition = currentScrollY + 100;
       
       for (let i = sections.length - 1; i >= 0; i--) {
         const section = document.getElementById(sections[i]);
@@ -28,20 +24,37 @@ const Navbar = () => {
           break;
         }
       }
+      
+      // Comportamento de mostrar/esconder navbar
+      if (currentScrollY > lastScrollY && currentScrollY > 100) {
+        // Scroll para baixo
+        setVisible(false);
+      } else {
+        // Scroll para cima
+        setVisible(true);
+      }
+      
+      // Efeito de sombra
+      if (currentScrollY > 50) {
+        setScrolled(true);
+      } else {
+        setScrolled(false);
+      }
+      
+      setLastScrollY(currentScrollY);
     };
     
     window.addEventListener('scroll', handleScroll);
     return () => {
       window.removeEventListener('scroll', handleScroll);
     };
-  }, []);
+  }, [lastScrollY]);
   
-  // Itens de navegação atualizados - removido "Contato"
   const navItems = [
     { title: 'Home', href: '#home' },
     { title: 'O Escritório', href: '#about' },
     { title: 'Áreas de Atuação', href: '#areas' },
-    { title: 'Localização', href: '#localizacao' } // Corrigido o href para #localizacao
+    { title: 'Localização', href: '#localizacao' }
   ];
   
   const socialItems = [
@@ -58,7 +71,6 @@ const Navbar = () => {
     }
   ];
   
-  // Smooth scroll para as seções
   const handleNavClick = (e, href) => {
     e.preventDefault();
     const targetId = href.substring(1);
@@ -82,16 +94,19 @@ const Navbar = () => {
     <nav 
       className={`fixed top-0 left-0 right-0 z-50 bg-white transition-all duration-300 ${
         scrolled ? 'shadow-md' : ''
+      } ${
+        visible ? 'translate-y-0' : '-translate-y-full'
       }`}
     >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex items-center justify-between h-20">
-          {/* Logo - à esquerda em mobile, centralizado em desktop */}
-          <div className="flex-shrink-0 md:absolute md:left-4 lg:left-8">
+        <div className="flex items-center justify-between h-24">
+          {/* Logo - centralizado em mobile */}
+          <div className="flex-shrink-0 flex-1 md:flex-none flex justify-center md:justify-start">
             <img
               src={soaveLogo}
               alt="Soave Advocacia"
-              className="h-12 sm:h-14 md:h-16 transition-all"
+              className="h-20 w-auto object-contain sm:h-24 md:h-28"
+              style={{ maxHeight: '80px' }}
             />
           </div>
           
@@ -105,13 +120,13 @@ const Navbar = () => {
                   onClick={(e) => handleNavClick(e, item.href)}
                   className={`px-3 py-2 text-sm font-medium relative group transition-all duration-300 ${
                     activeItem === item.href.substring(1) 
-                      ? 'text-blue-800' 
-                      : 'text-gray-700 hover:text-blue-800'
+                      ? 'text-[#55595c]' 
+                      : 'text-gray-700 hover:text-[#55595c]'
                   }`}
                 >
                   {item.title}
                   <span 
-                    className={`absolute inset-x-0 bottom-0 h-0.5 bg-blue-800 transform transition-transform duration-300 ease-out ${
+                    className={`absolute inset-x-0 bottom-0 h-0.5 bg-[#55595c] transform transition-transform duration-300 ease-out ${
                       activeItem === item.href.substring(1) 
                         ? 'scale-x-100' 
                         : 'scale-x-0 group-hover:scale-x-100'
@@ -130,7 +145,7 @@ const Navbar = () => {
                 href={item.href}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="text-gray-600 hover:text-blue-800 transition-colors duration-300"
+                className="text-gray-600 hover:text-[#55595c] transition-colors duration-300"
                 aria-label={item.label}
               >
                 {typeof item.icon === 'function' 
@@ -145,7 +160,7 @@ const Navbar = () => {
           <div className="md:hidden flex items-center">
             <button
               onClick={() => setIsOpen(!isOpen)}
-              className="inline-flex items-center justify-center p-2 rounded-md text-gray-700 hover:text-blue-800 hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-blue-800 transition-colors duration-300"
+              className="inline-flex items-center justify-center p-2 rounded-md text-gray-700 hover:text-[#55595c] hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-[#55595c] transition-colors duration-300"
               aria-expanded={isOpen}
             >
               <span className="sr-only">Abrir menu principal</span>
@@ -155,9 +170,9 @@ const Navbar = () => {
         </div>
       </div>
       
-      {/* Menu mobile atualizado */}
+      {/* Menu mobile */}
       {isOpen && (
-        <div className="md:hidden bg-white fixed top-20 left-0 right-0 shadow-lg z-50 border-t border-gray-100">
+        <div className="md:hidden bg-white fixed top-24 left-0 right-0 shadow-lg z-50 border-t border-gray-100">
           <div className="px-4 pt-2 pb-4 space-y-1 divide-y divide-gray-100">
             {/* Navegação */}
             <div className="py-2">
@@ -168,8 +183,8 @@ const Navbar = () => {
                   onClick={(e) => handleNavClick(e, item.href)}
                   className={`block px-3 py-3 text-base font-medium rounded-md transition-colors duration-300 ${
                     activeItem === item.href.substring(1) 
-                      ? 'text-blue-800 bg-blue-50' 
-                      : 'text-gray-700 hover:text-blue-800 hover:bg-gray-50'
+                      ? 'text-[#55595c] bg-gray-50' 
+                      : 'text-gray-700 hover:text-[#55595c] hover:bg-gray-50'
                   }`}
                 >
                   {item.title}
@@ -189,7 +204,7 @@ const Navbar = () => {
                     href={item.href}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="text-gray-600 hover:text-blue-800 transition-colors duration-300"
+                    className="text-gray-600 hover:text-[#55595c] transition-colors duration-300"
                     aria-label={item.label}
                   >
                     {typeof item.icon === 'function' 
