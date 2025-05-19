@@ -1,12 +1,29 @@
 // components/HistoriaSection.jsx
 import React, { useState, useEffect, useRef } from 'react';
-import { motion } from 'framer-motion';
-import { Scale, Landmark, GraduationCap } from 'lucide-react';
+import { motion, AnimatePresence } from 'framer-motion';
+import { Scale, Landmark, GraduationCap, ChevronLeft, ChevronRight } from 'lucide-react';
+import carlos from './carlos.png';
+import carlos2 from './carlos2.jpg';
 
 const HistoriaSection = () => {
   const [isInView, setIsInView] = useState(false);
   const [isMobile, setIsMobile] = useState(false);
+  const [currentSlide, setCurrentSlide] = useState(0);
   const sectionRef = useRef(null);
+  
+  // Array com as imagens do carrossel
+  const carouselImages = [
+    {
+      src: carlos,
+      alt: "Escritório Soave Advogados - Fachada",
+  
+    },
+    {
+      src: carlos2,
+      alt: "Escritório Soave Advogados - Equipe",
+     
+    }
+  ];
   
   // Detectar se é dispositivo móvel
   useEffect(() => {
@@ -47,6 +64,27 @@ const HistoriaSection = () => {
     };
   }, [isMobile]);
 
+  // Auto-play do carrossel
+  useEffect(() => {
+    const timer = setInterval(() => {
+      setCurrentSlide((prev) => (prev + 1) % carouselImages.length);
+    }, 5000); // Troca a cada 5 segundos
+
+    return () => clearInterval(timer);
+  }, [carouselImages.length]);
+
+  // Navegar para slide anterior
+  const prevSlide = () => {
+    setCurrentSlide((prev) => 
+      prev === 0 ? carouselImages.length - 1 : prev - 1
+    );
+  };
+
+  // Navegar para próximo slide
+  const nextSlide = () => {
+    setCurrentSlide((prev) => (prev + 1) % carouselImages.length);
+  };
+
   // Variantes de animação
   const containerVariants = {
     hidden: { opacity: 0 },
@@ -85,6 +123,29 @@ const HistoriaSection = () => {
       opacity: 1,
       transition: { duration: 0.6, ease: "easeOut", delay: 0.3 }
     }
+  };
+
+  // Variantes para o carrossel
+  const slideVariants = {
+    enter: (direction) => ({
+      x: direction > 0 ? 1000 : -1000,
+      opacity: 0
+    }),
+    center: {
+      zIndex: 1,
+      x: 0,
+      opacity: 1
+    },
+    exit: (direction) => ({
+      zIndex: 0,
+      x: direction < 0 ? 1000 : -1000,
+      opacity: 0
+    })
+  };
+
+  const slideTransition = {
+    x: { type: "spring", stiffness: 300, damping: 30 },
+    opacity: { duration: 0.2 }
   };
 
   return (
@@ -179,34 +240,89 @@ const HistoriaSection = () => {
           animate={isInView ? "visible" : "hidden"}
           variants={containerVariants}
         >
-          {/* Coluna da imagem */}
+          {/* Coluna do carrossel */}
           <motion.div 
             className="order-2 lg:order-1"
             variants={itemVariants}
           >
             <div className="relative">
-              {/* Imagem com design aprimorado mas ainda minimalista */}
+              {/* Container do carrossel */}
               <div className="relative rounded-lg overflow-hidden shadow-lg">
                 {/* Borda elegante */}
-                <div className="absolute inset-0 border border-gray-200 rounded-lg"></div>
+                <div className="absolute inset-0 border border-gray-200 rounded-lg z-10"></div>
                 
                 {/* Efeito sutil no canto */}
-                <div className="absolute top-0 right-0 w-20 h-20 bg-gradient-to-bl from-[#55595c]/5 to-transparent"></div>
+                <div className="absolute top-0 right-0 w-20 h-20 bg-gradient-to-bl from-[#55595c]/5 to-transparent z-10"></div>
                 
-                {/* Placeholder da imagem */}
-                <img 
-                  src="/api/placeholder/600/800" 
-                  alt="História do Escritório Soave Advogados" 
-                  className="w-full h-auto object-cover"
-                />
-                
-                {/* Pequeno elemento de design no canto */}
-                <div className="absolute bottom-4 right-4 flex items-center justify-center">
-                  <div className="bg-white/90 shadow-sm px-3 py-1.5 rounded-md text-xs font-medium text-[#55595c] flex items-center">
-                    <Landmark className="h-3.5 w-3.5 mr-1.5" />
-                    <span>Desde 1983</span>
-                  </div>
+                {/* Carrossel de imagens */}
+                <div className="relative w-full h-[500px] overflow-hidden bg-gray-50">
+                  <AnimatePresence mode="wait" custom={currentSlide}>
+                    <motion.img
+                      key={currentSlide}
+                      src={carouselImages[currentSlide].src}
+                      alt={carouselImages[currentSlide].alt}
+                      className="absolute inset-0 w-full h-full object-contain"
+                      custom={currentSlide}
+                      variants={slideVariants}
+                      initial="enter"
+                      animate="center"
+                      exit="exit"
+                      transition={slideTransition}
+                    />
+                  </AnimatePresence>
+                  
+                  {/* Overlay para melhor contraste dos controles */}
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/10 via-transparent to-transparent z-5"></div>
                 </div>
+                
+                {/* Controles do carrossel */}
+                <div className="absolute inset-0 flex items-center justify-between p-4 z-20">
+                  <button
+                    onClick={prevSlide}
+                    className="p-2 rounded-full bg-white/80 hover:bg-white text-[#55595c] 
+                             shadow-md hover:shadow-lg transition-all duration-200 
+                             backdrop-blur-sm border border-white/20"
+                    aria-label="Imagem anterior"
+                  >
+                    <ChevronLeft className="h-5 w-5" />
+                  </button>
+                  
+                  <button
+                    onClick={nextSlide}
+                    className="p-2 rounded-full bg-white/80 hover:bg-white text-[#55595c] 
+                             shadow-md hover:shadow-lg transition-all duration-200 
+                             backdrop-blur-sm border border-white/20"
+                    aria-label="Próxima imagem"
+                  >
+                    <ChevronRight className="h-5 w-5" />
+                  </button>
+                </div>
+                
+                {/* Indicadores (dots) */}
+                <div className="absolute bottom-4 left-1/2 transform -translate-x-1/2 flex space-x-2 z-20">
+                  {carouselImages.map((_, index) => (
+                    <button
+                      key={index}
+                      onClick={() => setCurrentSlide(index)}
+                      className={`w-2 h-2 rounded-full transition-all duration-200 ${
+                        index === currentSlide 
+                          ? 'bg-white scale-125' 
+                          : 'bg-white/50 hover:bg-white/75'
+                      }`}
+                      aria-label={`Ir para imagem ${index + 1}`}
+                    />
+                  ))}
+                </div>
+                
+                {/* Caption da imagem atual */}
+                {carouselImages[currentSlide].caption && (
+                  <div className="absolute bottom-4 right-4 flex items-center justify-center z-20">
+                    <div className="bg-white/90 shadow-sm px-3 py-1.5 rounded-md text-xs font-medium text-[#55595c] flex items-center">
+                      <Landmark className="h-3.5 w-3.5 mr-1.5" />
+                      <span>{carouselImages[currentSlide].caption}</span>
+                    </div>
+                  </div>
+                )}
               </div>
             </div>
           </motion.div>
@@ -236,7 +352,7 @@ const HistoriaSection = () => {
                 transition={{ delay: 0.3, duration: 0.6 }}
               >
                 <p className="text-gray-700 leading-relaxed mb-6">
-                  Soave Advogados Associados é um competente e respeitado escritório de advocacia localizado em Sorocaba, com mais de 40 anos de excelência em diversas áreas do direito. Fundado pelos Drs. Sérgio e Carlos Soave (in memorian), o escritório inovou na resolução de conflitos, inspirando colegas e familiares.
+                  Soave Advogados Associados é um competente e respeitado escritório de advocacia localizado em Sorocaba, com mais de 40 anos de excelência em diversas áreas do direito. Fundado pelos Drs. Sérgio e Carlos Soave (in memorian), o escritório inovrou na resolução de conflitos, inspirando colegas e familiares.
                 </p>
                 
                 <p className="text-gray-700 leading-relaxed">

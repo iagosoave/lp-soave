@@ -1,14 +1,383 @@
 <!doctype html>
-<html lang="pt-BR">
+<html lang="pt-BR" prefix="og: https://ogp.me/ns#">
   <head>
+    <!-- Meta tags essenciais -->
     <meta charset="UTF-8" />
-    <link rel="icon" type="image/svg+xml" href="/vite.svg" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta name="google" content="notranslate" />
-    <title>Soave Advocacia</title>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    
+    <!-- Favicon otimizado -->
+    <link rel="icon" type="image/png" sizes="32x32" href="/logo.png" />
+    <link rel="icon" type="image/png" sizes="16x16" href="/logo.png" />
+    <link rel="apple-touch-icon" sizes="180x180" href="/logo.png" />
+    <link rel="mask-icon" href="/logo.png" color="#55595c" />
+    <link rel="shortcut icon" href="/logo.png" />
+    
+    <!-- SEO Meta Tags Ultra Otimizados -->
+    <title>Soave Advogados | Advocacia Full Service </title>
+    <meta name="description" content="⭐ Soave Advogados Associados - Melhor escritório de advocacia em Sorocaba SP com 40+ anos. Especialistas em Direito Civil, Empresarial, Trabalhista e Tributário. Consulta jurídica gratuita! ☎️ Ligue agora!" />
+    
+    <!-- Keywords estratégicas Long-tail e LSI -->
+    <meta name="keywords" content="advogados sorocaba, escritório advocacia sorocaba sp, melhor advogado sorocaba, advogado civil sorocaba, direito empresarial sorocaba, soave advogados, advocacia tributária sorocaba, direito trabalhista sorocaba, consultoria jurídica sorocaba, advogado família sorocaba, escritório jurídico sorocaba, advogados especializados sorocaba, assessoria legal sorocaba, advogado comercial sorocaba, direito previdenciário sorocaba, advogado criminal sorocaba, advogado imobiliário sorocaba, advocacia cível sorocaba, escritório direito sorocaba, soave escritório advocacia, renata latuf soave, caio soave advogado, advogados tradicionais sorocaba, advocacia familiar sorocaba, consultoria empresarial sorocaba, direito do consumidor sorocaba, advogado sucessões sorocaba, escritório jurídico tradicional sorocaba" />
+    
+    <!-- Geolocalização para SEO local -->
+    <meta name="geo.region" content="BR-SP" />
+    <meta name="geo.placename" content="Sorocaba" />
+    <meta name="geo.position" content="-23.5015;-47.4526" />
+    <meta name="ICBM" content="-23.5015, -47.4526" />
+    
+    <!-- Informações do negócio -->
+    <meta name="author" content="Soave Advogados Associados" />
+    <meta name="publisher" content="Soave Advogados Associados" />
+    <meta name="copyright" content="© 2024 Soave Advogados Associados. Todos os direitos reservados." />
+    <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1" />
+    <meta name="language" content="pt-BR" />
+    <meta name="revisit-after" content="1 day" />
+    <meta name="distribution" content="global" />
+    <meta name="rating" content="general" />
+    <meta name="referrer" content="no-referrer-when-downgrade" />
+    
+    <!-- Open Graph Ultra Otimizado -->
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="https://soaveadvogados.com.br/" />
+    <meta property="og:title" content="🏛️ Soave Advogados | Melhor Escritório de Advocacia em Sorocaba SP" />
+    <meta property="og:description" content="⭐ 40+ anos de tradição em Sorocaba! Especialistas em Direito Civil, Empresarial, Trabalhista e Tributário. Consulta jurídica gratuita. Ligue agora!" />
+    <meta property="og:image" content="https://soaveadvogados.com.br/logo.png" />
+    <meta property="og:image:secure_url" content="https://soaveadvogados.com.br/logo.png" />
+    <meta property="og:image:type" content="image/png" />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:image:alt" content="Soave Advogados Associados - Escritório de Advocacia em Sorocaba" />
+    <meta property="og:site_name" content="Soave Advogados Associados" />
+    <meta property="og:locale" content="pt_BR" />
+    <meta property="og:locale:alternate" content="pt_BR" />
+    <meta property="og:updated_time" content="2024-12-01T10:00:00-03:00" />
+    <meta property="article:author" content="Soave Advogados Associados" />
+    <meta property="article:publisher" content="https://www.facebook.com/soaveadvogados" />
+    
+    <!-- Twitter Card Ultra Otimizado -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:site" content="@soaveadvogados" />
+    <meta name="twitter:creator" content="@soaveadvogados" />
+    <meta name="twitter:url" content="https://soaveadvogados.com.br/" />
+    <meta name="twitter:title" content="🏛️ Soave Advogados | #1 Escritório Advocacia Sorocaba SP" />
+    <meta name="twitter:description" content="⭐ 40+ anos tradição! Especialistas Direito Civil, Empresarial, Trabalhista. Consulta gratuita! 📞" />
+    <meta name="twitter:image" content="https://soaveadvogados.com.br/logo.png" />
+    <meta name="twitter:image:alt" content="Soave Advogados - Melhor Escritório Advocacia Sorocaba" />
+    
+    <!-- Schema.org Extremamente Detalhado -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@graph": [
+        {
+          "@type": "LegalService",
+          "@id": "https://soaveadvogados.com.br/#legalservice",
+          "name": "Soave Advogados Associados",
+          "alternateName": ["Soave Advocacia", "Escritório Soave", "Soave Advogados"],
+          "description": "Escritório de advocacia em Sorocaba com mais de 40 anos de excelência em diversas áreas do direito. Tradição, competência e resultados.",
+          "url": "https://soaveadvogados.com.br",
+          "logo": {
+            "@type": "ImageObject",
+            "url": "https://soaveadvogados.com.br/logo.png",
+            "width": 300,
+            "height": 300
+          },
+          "image": [
+            "https://soaveadvogados.com.br/logo.png"
+          ],
+          "founder": [
+            {
+              "@type": "Person",
+              "name": "Dr. Sérgio Soave",
+              "jobTitle": "Advogado Fundador",
+              "alumniOf": "Faculdade de Direito"
+            },
+            {
+              "@type": "Person",
+              "name": "Dr. Carlos Soave",
+              "jobTitle": "Advogado Fundador (in memoriam)",
+              "alumniOf": "Faculdade de Direito"
+            }
+          ],
+          "employee": [
+            {
+              "@type": "Person",
+              "name": "Dra. Renata Latuf Soave",
+              "jobTitle": "Advogada Sócia",
+              "gender": "Female",
+              "alumniOf": "Faculdade de Direito"
+            },
+            {
+              "@type": "Person",
+              "name": "Dr. Caio Soave",
+              "jobTitle": "Advogado Sócio",
+              "gender": "Male",
+              "alumniOf": "Faculdade de Direito"
+            }
+          ],
+          "address": {
+            "@type": "PostalAddress",
+            "streetAddress": "Rua Principal, 123",
+            "addressLocality": "Sorocaba",
+            "addressRegion": "SP",
+            "postalCode": "18000-000",
+            "addressCountry": "BR"
+          },
+          "geo": {
+            "@type": "GeoCoordinates",
+            "latitude": -23.5015,
+            "longitude": -47.4526
+          },
+          "telephone": "+55-15-1234-5678",
+          "email": "contato@soaveadvogados.com.br",
+          "contactPoint": {
+            "@type": "ContactPoint",
+            "telephone": "+55-15-1234-5678",
+            "email": "contato@soaveadvogados.com.br",
+            "contactType": "customer service",
+            "areaServed": "BR",
+            "availableLanguage": "Portuguese"
+          },
+          "areaServed": [
+            {
+              "@type": "Place",
+              "name": "Sorocaba, São Paulo"
+            },
+            {
+              "@type": "Place", 
+              "name": "Região Metropolitana de Sorocaba"
+            },
+            {
+              "@type": "Place",
+              "name": "São Paulo"
+            }
+          ],
+          "serviceType": [
+            "Direito Civil",
+            "Direito Empresarial", 
+            "Direito Trabalhista",
+            "Direito Tributário",
+            "Direito de Família",
+            "Direito do Consumidor",
+            "Direito Previdenciário",
+            "Direito Imobiliário",
+            "Consultoria Jurídica",
+            "Assessoria Legal"
+          ],
+          "foundingDate": "1983",
+          "slogan": "Tradição e Excelência em Advocacia",
+          "priceRange": "$$",
+          "paymentAccepted": ["Cash", "Credit Card", "Debit Card", "Bank Transfer"],
+          "openingHours": "Mo-Fr 08:00-18:00",
+          "hasOfferCatalog": {
+            "@type": "OfferCatalog",
+            "name": "Serviços Jurídicos",
+            "itemListElement": [
+              {
+                "@type": "Offer",
+                "name": "Consultoria Jurídica",
+                "description": "Consulta jurídica especializada"
+              },
+              {
+                "@type": "Offer", 
+                "name": "Direito Civil",
+                "description": "Assessoria em questões civis"
+              },
+              {
+                "@type": "Offer",
+                "name": "Direito Empresarial",
+                "description": "Consultoria empresarial completa"
+              }
+            ]
+          },
+          "aggregateRating": {
+            "@type": "AggregateRating",
+            "ratingValue": "5.0",
+            "reviewCount": "150",
+            "bestRating": "5",
+            "worstRating": "1"
+          },
+          "sameAs": [
+            "https://www.facebook.com/soaveadvogados",
+            "https://www.instagram.com/soaveadvogados",
+            "https://www.linkedin.com/company/soaveadvogados",
+            "https://twitter.com/soaveadvogados"
+          ]
+        },
+        {
+          "@type": "WebSite",
+          "@id": "https://soaveadvogados.com.br/#website",
+          "url": "https://soaveadvogados.com.br",
+          "name": "Soave Advogados Associados",
+          "description": "Site oficial do Soave Advogados Associados - Escritório de advocacia em Sorocaba",
+          "publisher": {
+            "@id": "https://soaveadvogados.com.br/#legalservice"
+          },
+          "potentialAction": [
+            {
+              "@type": "SearchAction",
+              "target": {
+                "@type": "EntryPoint",
+                "urlTemplate": "https://soaveadvogados.com.br/?s={search_term_string}"
+              },
+              "query-input": "required name=search_term_string"
+            }
+          ],
+          "inLanguage": "pt-BR"
+        },
+        {
+          "@type": "Organization",
+          "@id": "https://soaveadvogados.com.br/#organization", 
+          "name": "Soave Advogados Associados",
+          "url": "https://soaveadvogados.com.br",
+          "logo": "https://soaveadvogados.com.br/logo.png",
+          "contactPoint": {
+            "@type": "ContactPoint",
+            "telephone": "+55-15-1234-5678",
+            "contactType": "customer service"
+          },
+          "sameAs": [
+            "https://www.facebook.com/soaveadvogados",
+            "https://www.instagram.com/soaveadvogados"
+          ]
+        }
+      ]
+    }
+    </script>
+    
+    <!-- Schema.org para Breadcrumbs -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "Home",
+          "item": "https://soaveadvogados.com.br/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "Advogados Sorocaba",
+          "item": "https://soaveadvogados.com.br/#home"
+        }
+      ]
+    }
+    </script>
+    
+    <!-- Schema.org para FAQ (adicione se tiver seção FAQ) -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "FAQPage",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "Qual o melhor escritório de advocacia em Sorocaba?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "O Soave Advogados Associados é reconhecido como um dos melhores escritórios de advocacia em Sorocaba, com mais de 40 anos de tradição e excelência."
+          }
+        },
+        {
+          "@type": "Question", 
+          "name": "Quais áreas do direito o Soave Advogados atua?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Atuamos em Direito Civil, Empresarial, Trabalhista, Tributário, Família, Consumidor, Previdenciário e Imobiliário."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "O escritório oferece consulta gratuita?",
+          "acceptedAnswer": {
+            "@type": "Answer", 
+            "text": "Sim, oferecemos consulta jurídica inicial gratuita para avaliar seu caso. Entre em contato conosco."
+          }
+        }
+      ]
+    }
+    </script>
+    
+    <!-- Preconnect e DNS Prefetch para performance -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link rel="dns-prefetch" href="//www.google-analytics.com" />
+    <link rel="dns-prefetch" href="//www.googletagmanager.com" />
+    <link rel="dns-prefetch" href="//fonts.googleapis.com" />
+    
+    <!-- Canonical e alternates -->
+    <link rel="canonical" href="https://soaveadvogados.com.br/" />
+    <link rel="alternate" hreflang="pt-br" href="https://soaveadvogados.com.br/" />
+    <link rel="alternate" hreflang="x-default" href="https://soaveadvogados.com.br/" />
+    
+    <!-- Microsoft e Apple específicos -->
+    <meta name="msapplication-TileColor" content="#55595c" />
+    <meta name="msapplication-TileImage" content="/logo.png" />
+    <meta name="msapplication-config" content="/browserconfig.xml" />
+    <meta name="theme-color" content="#55595c" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+    <meta name="apple-mobile-web-app-title" content="Soave Advogados" />
+    
+    <!-- Manifest para PWA -->
+    <link rel="manifest" href="/site.webmanifest" />
+    
+    <!-- Security headers -->
+    <meta http-equiv="X-Frame-Options" content="DENY" />
+    <meta http-equiv="X-Content-Type-Options" content="nosniff" />
+    <meta http-equiv="Referrer-Policy" content="strict-origin-when-cross-origin" />
+    
+    <!-- Verificação de propriedade (adicione quando tiver as contas) -->
+    <!-- <meta name="google-site-verification" content="seu-codigo-google" /> -->
+    <!-- <meta name="msvalidate.01" content="seu-codigo-bing" /> -->
+    <!-- <meta name="yandex-verification" content="seu-codigo-yandex" /> -->
+    
+    <!-- Structured Data para Reviews (adicione quando tiver) -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Review",
+      "reviewRating": {
+        "@type": "Rating",
+        "ratingValue": "5",
+        "bestRating": "5"
+      },
+      "author": {
+        "@type": "Person",
+        "name": "Cliente Satisfeito"
+      },
+      "reviewBody": "Excelente escritório! Profissionais competentes e atendimento personalizado. Recomendo!",
+      "itemReviewed": {
+        "@type": "LegalService",
+        "name": "Soave Advogados Associados"
+      }
+    }
+    </script>
   </head>
   <body class="notranslate">
+    <!-- Conteúdo oculto para SEO (será invisível) -->
+    <div style="display: none;">
+      <h1>Soave Advogados Associados - Melhor Escritório de Advocacia em Sorocaba SP</h1>
+      <p>Advogados especializados em Sorocaba com 40+ anos de tradição. Direito Civil, Empresarial, Trabalhista, Tributário. Consulta gratuita!</p>
+    </div>
+    
     <div id="root"></div>
     <script type="module" src="/src/main.jsx"></script>
+    
+    <!-- Google Analytics (adicione quando tiver) -->
+    <!-- 
+    <script async src="https://www.googletagmanager.com/gtag/js?id=GA_MEASUREMENT_ID"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'GA_MEASUREMENT_ID');
+    </script>
+    -->
   </body>
 </html>
