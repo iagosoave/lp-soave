@@ -54,6 +54,7 @@ const Navbar = () => {
     { title: 'Home', href: '#home' },
     { title: 'O Escritório', href: '#about' },
     { title: 'Áreas de Atuação', href: '#areas' },
+    { title: 'História', href: '#historia' },
     { title: 'Localização', href: '#localizacao' }
   ];
   

@@ -352,7 +352,7 @@ const HistoriaSection = () => {
                 transition={{ delay: 0.3, duration: 0.6 }}
               >
                 <p className="text-gray-700 leading-relaxed mb-6">
-                  Soave Advogados Associados é um competente e respeitado escritório de advocacia localizado em Sorocaba, com mais de 40 anos de excelência em diversas áreas do direito. Fundado pelos Drs. Sérgio e Carlos Soave (in memorian), o escritório inovrou na resolução de conflitos, inspirando colegas e familiares.
+                  Soave Advogados Associados é um competente e respeitado escritório de advocacia localizado em Sorocaba, com mais de 40 anos de excelência em diversas áreas do direito. Fundado pelos Drs. Sérgio e Carlos Soave (in memorian), o escritório inovou na resolução de conflitos, inspirando colegas e familiares.
                 </p>
                 
                 <p className="text-gray-700 leading-relaxed">

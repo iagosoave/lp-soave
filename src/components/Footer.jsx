@@ -39,6 +39,11 @@ const Footer = () => {
                 </a>
               </li>
               <li>
+                <a href="#historia" className="text-gray-300 hover:text-white transition-colors duration-300 text-sm">
+                  Nossa História
+                </a>
+              </li>
+              <li>
                 <a href="#areas" className="text-gray-300 hover:text-white transition-colors duration-300 text-sm">
                   Áreas de Atuação
                 </a>
