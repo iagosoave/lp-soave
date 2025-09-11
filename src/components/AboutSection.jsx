@@ -88,23 +88,33 @@ const OfficeHistorySection = () => {
                 animate="visible"
                 transition={{ delay: 0.3 }}
               >
-                Soave Advogados é um escritório <span className="font-medium">full service</span> com mais de 40 anos de experiência na defesa dos interesses de clientes, como empresas, pessoas físicas, famílias, governos e organizações sem fins lucrativos. Nossa abordagem inovadora combina <span className="font-medium">expertise técnica</span> e realismo comercial para identificar necessidades jurídicas e oferecer um atendimento de excelência na resolução de conflitos.
+                Soave Advogados é um escritório <span className="font-medium">full service</span> com mais de 40 anos de experiência dedicado à defesa dos interesses de clientes como empresas, pessoas físicas, famílias, governos e organizações sem fins lucrativos. Fundado pelos Drs. Sérgio e Carlos Soave (in memoriam), o escritório consolidou ao longo de sua trajetória uma reputação marcada pela seriedade, ética e compromisso com a justiça.
+              </motion.p>
+              <motion.p 
+                className="text-[15px] md:text-[17px] leading-relaxed md:leading-[1.7] text-justify"
+                variants={textVariants}
+                initial="hidden"
+                animate="visible"
+                transition={{ delay: 0.4 }}
+              >
+                Atualmente sob a direção da Dra. Renata Latuf Soave e do Dr. Caio Soave, o escritório dá continuidade ao legado construído, expandindo sua atuação para novas áreas em resposta às transformações constantes do direito e da sociedade. Nossa abordagem inovadora combina <span className="font-medium">sólida expertise técnica</span> e visão prática do mercado, permitindo identificar com precisão as necessidades jurídicas de cada cliente e oferecer soluções personalizadas.
               </motion.p>
             </div>
           </motion.div>
           
           {/* Coluna da imagem - visível apenas em desktop */}
           <motion.div 
-            className="hidden lg:block lg:w-2/5 xl:w-2/5"
+            // ALTERAÇÃO AQUI: Adicionado mt-12 para empurrar a imagem para baixo
+            className="hidden lg:block lg:w-2/5 xl:w-2/5 mt-12"
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ duration: 1, delay: 0.4 }}
           >
-            <div className="relative h-[400px] overflow-hidden">
+            <div className="relative"> 
               <motion.img 
                 src={about}
                 alt="Escritório Soave Advocacia" 
-                className="w-full h-full object-cover object-center"
+                className="max-w-full h-auto block" 
                 initial={{ scale: 1.1 }}
                 animate={{ scale: 1 }}
                 transition={{ duration: 1.5, ease: "easeOut" }}
@@ -116,7 +126,8 @@ const OfficeHistorySection = () => {
       
       {/* Imagem full-width para mobile - grudada no final da seção */}
       <motion.div 
-        className="lg:hidden w-full mt-0 relative"
+        // ALTERAÇÃO AQUI: Trocado mt-0 por mt-8 para criar espaço acima da imagem no mobile
+        className="lg:hidden w-full mt-8 relative"
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         transition={{ duration: 1, delay: 0.4 }}
@@ -128,11 +139,11 @@ const OfficeHistorySection = () => {
           position: 'relative'
         }}
       >
-        <div className="h-[400px] overflow-hidden">
+        <div className="relative">
           <motion.img 
             src={about}
             alt="Escritório Soave Advocacia" 
-            className="w-full h-full object-cover object-center"
+            className="max-w-full h-auto block" 
             initial={{ scale: 1.1 }}
             animate={{ scale: 1 }}
             transition={{ duration: 1.5, ease: "easeOut" }}
